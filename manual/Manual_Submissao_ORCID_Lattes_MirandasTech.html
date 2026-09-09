@@ -1,0 +1,1621 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MirandasTech · Submissão de artigos, ORCID e Lattes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+
+:root{
+  --paper:#F1F4F7; --surface:#FFFFFF; --surface-2:#F8FAFB;
+  --ink:#101720; --ink-2:#4A5866; --ink-3:#75828E;
+  --rule:#D3DAE1; --rule-2:#E5EAEF;
+  --blueprint:#17436B; --blueprint-2:#2C6396; --blueprint-soft:#E4EDF5;
+  --signal:#C4530E; --signal-soft:#FBEADD;
+  --go:#186B50; --go-soft:#E0EFE9;
+  --stop:#A0231C; --stop-soft:#F9E5E3;
+  --amber:#8A6000; --amber-soft:#F9EFD6;
+  --shadow:0 1px 2px rgba(16,23,32,.06),0 8px 24px -12px rgba(16,23,32,.18);
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  --cond:'IBM Plex Sans Condensed','Helvetica Neue',Arial,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0C1218; --surface:#131B23; --surface-2:#182129;
+    --ink:#E3E9EF; --ink-2:#94A3B1; --ink-3:#71808E;
+    --rule:#26313C; --rule-2:#1E2831;
+    --blueprint:#7DB2DF; --blueprint-2:#A3CAEB; --blueprint-soft:#15283A;
+    --signal:#EE8A46; --signal-soft:#33200F;
+    --go:#54C398; --go-soft:#0F2620;
+    --stop:#EC7B72; --stop-soft:#2D1614;
+    --amber:#DCAC3D; --amber-soft:#2A2110;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0C1218; --surface:#131B23; --surface-2:#182129;
+  --ink:#E3E9EF; --ink-2:#94A3B1; --ink-3:#71808E;
+  --rule:#26313C; --rule-2:#1E2831;
+  --blueprint:#7DB2DF; --blueprint-2:#A3CAEB; --blueprint-soft:#15283A;
+  --signal:#EE8A46; --signal-soft:#33200F;
+  --go:#54C398; --go-soft:#0F2620;
+  --stop:#EC7B72; --stop-soft:#2D1614;
+  --amber:#DCAC3D; --amber-soft:#2A2110;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--blueprint-2);outline-offset:3px;border-radius:2px}
+
+/* ---------- sections ---------- */
+.part{padding-top:56px}
+.part-head{display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--rule);padding-top:14px;margin-bottom:8px}
+.part-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);font-weight:600}
+.part-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+h2{font-family:var(--cond);font-weight:700;font-size:clamp(27px,3.6vw,38px);line-height:1.12;letter-spacing:-.012em;margin:6px 0 0;text-wrap:balance;max-width:22ch}
+h3{font-family:var(--cond);font-weight:600;font-size:22px;line-height:1.25;margin:40px 0 0;color:var(--ink);text-wrap:balance}
+h4{font-family:var(--cond);font-weight:600;font-size:17px;line-height:1.3;margin:26px 0 0;color:var(--blueprint);letter-spacing:.01em}
+p,ul,ol{max-width:68ch}
+p{margin:14px 0 0}
+ul,ol{margin:14px 0 0;padding-left:22px}
+li{margin:7px 0}
+li::marker{color:var(--blueprint)}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+a{color:var(--blueprint);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+code{font-family:var(--mono);font-size:.855em;background:var(--surface-2);border:1px solid var(--rule-2);padding:1px 5px;border-radius:3px;color:var(--ink)}
+.dek{font-size:18px;color:var(--ink-2);max-width:64ch;margin:16px 0 0;line-height:1.6}
+
+/* ---------- blocks ---------- */
+.rule-box,.trap,.case,.note{margin:24px 0 0;padding:16px 20px;border-radius:4px;max-width:74ch;border-left:3px solid}
+.rule-box{background:var(--blueprint-soft);border-left-color:var(--blueprint)}
+.trap{background:var(--signal-soft);border-left-color:var(--signal)}
+.case{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--go)}
+.note{background:var(--surface-2);border-left-color:var(--ink-3)}
+.blabel{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;display:block;margin-bottom:7px}
+.rule-box .blabel{color:var(--blueprint)}
+.trap .blabel{color:var(--signal)}
+.case .blabel{color:var(--go)}
+.note .blabel{color:var(--ink-3)}
+.rule-box p:first-of-type,.trap p:first-of-type,.case p:first-of-type,.note p:first-of-type{margin-top:0}
+.rule-box p,.trap p,.case p,.rule-box li,.trap li,.case li,.note p,.note li{max-width:none;font-size:16px}
+.case .src{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:10px;display:block;line-height:1.5}
+
+/* ---------- figures ---------- */
+figure{margin:34px 0 0;max-width:none}
+figcaption{font-family:var(--cond);font-size:13.5px;color:var(--ink-2);margin-top:11px;line-height:1.5;max-width:76ch}
+figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--signal);font-weight:600;margin-right:7px}
+.frame{border:1px solid var(--rule);background:var(--surface);border-radius:4px;padding:24px;overflow-x:auto}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:26px 0 0;border:1px solid var(--rule);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-family:var(--cond);font-size:14.5px;min-width:520px}
+th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:11px 14px;border-bottom:1px solid var(--rule);background:var(--surface-2);vertical-align:bottom}
+td{padding:11px 14px;border-bottom:1px solid var(--rule-2);vertical-align:top;line-height:1.45;color:var(--ink)}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+td.mono{font-family:var(--mono);font-size:12.5px}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;font-weight:600;text-transform:uppercase;padding:2.5px 8px;border-radius:20px;white-space:nowrap}
+.p-go{background:var(--go-soft);color:var(--go)}
+.p-amber{background:var(--amber-soft);color:var(--amber)}
+.p-stop{background:var(--stop-soft);color:var(--stop)}
+.p-blue{background:var(--blueprint-soft);color:var(--blueprint)}
+
+/* ---------- terminal ---------- */
+.term{background:#0B1219;border:1px solid #223040;border-radius:5px;overflow:hidden;margin:26px 0 0}
+.term-bar{display:flex;align-items:center;gap:7px;padding:8px 13px;background:#141F2B;border-bottom:1px solid #223040}
+.term-dot{width:9px;height:9px;border-radius:50%;background:#33445A}
+.term-title{font-family:var(--mono);font-size:10.5px;color:#7A8B9C;margin-left:8px;letter-spacing:.05em}
+.term pre{margin:0;padding:15px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.62;color:#C9D6E2}
+.term .c-p{color:#5FA8DC}
+.term .c-o{color:#E8A055}
+.term .c-g{color:#5FC79A}
+.term .c-m{color:#71828F}
+.term .c-r{color:#E8776C}
+
+/* ---------- code ---------- */
+.code{background:var(--surface-2);border:1px solid var(--rule);border-radius:4px;margin:24px 0 0;overflow:hidden}
+.code-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);padding:8px 14px;border-bottom:1px solid var(--rule);background:var(--surface)}
+.code pre{margin:0;padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.66;color:var(--ink)}
+.code .k{color:var(--blueprint);font-weight:500}
+.code .s{color:var(--go)}
+.code .cm{color:var(--ink-3);font-style:italic}
+
+/* ---------- charts ---------- */
+.bars{display:flex;flex-direction:column;gap:11px;margin:0}
+.bar-row{display:grid;grid-template-columns:minmax(96px,152px) minmax(0,1fr) 62px;gap:12px;align-items:center}
+.bar-lab{font-family:var(--cond);font-size:13.5px;color:var(--ink-2);line-height:1.25;text-align:right}
+.bar-track{background:var(--rule-2);border-radius:2px;height:22px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;background:var(--blueprint)}
+.bar-fill.f-signal{background:var(--signal)}
+.bar-fill.f-go{background:var(--go)}
+.bar-fill.f-stop{background:var(--stop)}
+.bar-fill.f-amber{background:var(--amber)}
+.bar-fill.f-mute{background:var(--ink-3)}
+.bar-val{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink);text-align:right;font-weight:500}
+.bar-zero{font-family:var(--mono);font-size:11px;color:var(--stop);font-weight:600;position:absolute;left:4px;top:50%;transform:translateY(-50%)}
+@media (max-width:560px){.bar-row{grid-template-columns:minmax(72px,102px) minmax(0,1fr) 52px;gap:8px}.bar-lab{font-size:12px}}
+
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:8px;align-items:center}
+.fstep{border:1px solid var(--rule);background:var(--surface-2);border-radius:4px;padding:12px 18px;text-align:center;width:100%;max-width:640px;position:relative}
+.fstep .fn{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1}
+.fstep .ft{font-family:var(--cond);font-size:13.5px;color:var(--ink-2);margin-top:5px;line-height:1.35}
+.fstep.hl{border-color:var(--signal);background:var(--signal-soft)}
+.fstep.hl .fn{color:var(--signal)}
+.fdrop{font-family:var(--mono);font-size:11.5px;color:var(--stop);text-align:center;line-height:1.4}
+
+/* flow map */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
+.node{border:1px solid var(--rule);border-radius:4px;background:var(--surface-2);padding:12px 13px;display:flex;flex-direction:column;gap:6px}
+.node .nn{font-family:var(--mono);font-size:10px;letter-spacing:.11em;color:var(--ink-3);font-weight:600}
+.node .nt{font-family:var(--cond);font-size:15px;font-weight:600;line-height:1.22;color:var(--ink)}
+.node .nd{font-size:13px;color:var(--ink-2);line-height:1.45;font-family:var(--cond)}
+.node .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.node.gate{border-color:var(--stop);background:var(--stop-soft)}
+.node.gate .nn{color:var(--stop)}
+
+/* two-column compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--surface)}
+.compare>div{padding:18px 20px}
+.compare>div:first-child{border-right:1px solid var(--rule)}
+.cmp-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.compare ul{margin:0;padding-left:18px;max-width:none}
+.compare li{font-family:var(--cond);font-size:14.5px;line-height:1.45;margin:8px 0;color:var(--ink)}
+@media (max-width:640px){.compare{grid-template-columns:1fr}.compare>div:first-child{border-right:0;border-bottom:1px solid var(--rule)}}
+
+/* ui schematic */
+.ui{border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:var(--surface);font-family:var(--cond)}
+.ui-bar{background:var(--surface-2);border-bottom:1px solid var(--rule);padding:7px 12px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center}
+.ui-body{display:grid;grid-template-columns:170px minmax(0,1fr);min-height:150px}
+.ui-side{border-right:1px solid var(--rule);padding:10px;background:var(--surface-2);font-size:13px;color:var(--ink-2)}
+.ui-side div{padding:3.5px 6px;border-radius:3px;line-height:1.3}
+.ui-side div.sel{background:var(--blueprint-soft);color:var(--blueprint);font-weight:600}
+.ui-main{padding:10px}
+.ui-row{display:grid;grid-template-columns:minmax(0,1fr) 78px 46px;gap:9px;padding:6px 7px;border-bottom:1px solid var(--rule-2);font-size:13px;align-items:center;color:var(--ink)}
+.ui-row.head{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule)}
+.ui-row span:nth-child(2),.ui-row span:nth-child(3){font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.schematic-tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);border:1px dashed var(--rule);padding:2px 7px;border-radius:3px}
+@media (max-width:560px){.ui-body{grid-template-columns:1fr}.ui-side{border-right:0;border-bottom:1px solid var(--rule)}}
+
+/* checklist */
+.check{border:1px solid var(--rule);border-radius:4px;background:var(--surface);overflow:hidden}
+.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-bottom:1px solid var(--rule-2)}
+.check-item:last-child{border-bottom:0}
+.check-item input{margin:4px 0 0;width:16px;height:16px;accent-color:var(--blueprint);flex:none;cursor:pointer}
+.check-item label{font-family:var(--cond);font-size:14.5px;line-height:1.45;cursor:pointer;color:var(--ink)}
+.check-item label b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:2px}
+.check-item.done label{color:var(--ink-3);text-decoration:line-through}
+.check-foot{padding:10px 16px;background:var(--surface-2);border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;color:var(--ink-3);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.check-foot button{font-family:var(--mono);font-size:10.5px;background:none;border:1px solid var(--rule);color:var(--ink-2);padding:3px 10px;border-radius:3px;cursor:pointer;letter-spacing:.05em}
+.check-foot button:hover{border-color:var(--blueprint);color:var(--blueprint)}
+
+/* refs */
+.refs{margin:14px 0 0;padding-left:30px;list-style:decimal;max-width:none}
+.refs li{display:list-item;padding:6px 0 6px 4px;border-bottom:1px solid var(--rule-2);margin:0;font-family:var(--cond);font-size:13.5px;line-height:1.4}
+.refs li::marker{font-family:var(--mono);font-size:11px;color:var(--signal);font-weight:600}
+.refs li a{overflow-wrap:anywhere;font-family:var(--mono);font-size:11px;display:inline-block;margin-top:2px;color:var(--ink-3);text-decoration:none}
+.refs li a:hover{color:var(--blueprint);text-decoration:underline}
+.refs .rt{color:var(--ink);font-weight:500}
+
+.colophon{margin-top:70px;padding-top:22px;border-top:3px solid var(--blueprint);font-family:var(--mono);font-size:11.5px;color:var(--ink-3);line-height:1.75}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);margin:36px 0 0;display:block;font-weight:600}
+
+
+
+/* ================= motor de slides ================= */
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+body{margin:0}
+.slide{height:100vh;min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:flex-start;padding:26px clamp(64px,6vw,96px) 26px;font-size:15.5px;overflow:hidden;position:relative;border-bottom:1px solid var(--rule-2);background:var(--paper)}
+.slide.alt{background:var(--surface-2)}
+.slide .inner{max-width:none;width:100%;margin:0;max-height:calc(100vh - 52px);overflow:auto;scrollbar-width:thin}
+.slide.fit .inner{overflow:visible}
+.slide h2{max-width:none;font-size:clamp(24px,3.2vw,38px);margin-top:6px}
+.slide .lead{font-size:clamp(15.5px,1.35vw,18px);color:var(--ink-2);max-width:none;margin:10px 0 0;line-height:1.5}
+.slide p,.slide ul,.slide ol,.slide .rule-box,.slide .trap,.slide .case,.slide .note,.slide .more,.slide figcaption,.slide .check,.slide .refs,.slide h2{max-width:none}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(16px,2.4vw,34px);align-items:start;margin-top:16px}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.two figure,.two .tw,.two .code,.two .term{margin-top:0}
+.kicker-part{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);font-weight:600}
+.kicker-part span{color:var(--ink-3);font-weight:400;margin-left:10px}
+.more{margin-top:16px;max-width:76ch;border:1px solid var(--rule);border-radius:4px;background:var(--surface)}
+.more summary{cursor:pointer;font-family:var(--cond);font-weight:600;font-size:14px;padding:10px 14px;color:var(--blueprint);list-style:none;display:flex;align-items:center;gap:8px}
+.more summary::before{content:"+";font-family:var(--mono);width:16px;display:inline-block;text-align:center}
+.more[open] summary::before{content:"–"}
+.more>div{padding:0 16px 14px;font-size:15.5px}
+.more>div p,.more>div li{max-width:none;font-size:15.5px}
+.more .tw{margin-top:10px}
+.bul{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:9px}
+.bul li{position:relative;padding-left:24px;font-size:15.5px;line-height:1.5;margin:0}
+.bul li::before{content:"";position:absolute;left:4px;top:9px;width:10px;height:10px;border-radius:2px;background:var(--blueprint)}
+.bul li.warn::before{background:var(--signal)}
+.bul li.stop::before{background:var(--stop)}
+.bul li.go::before{background:var(--go)}
+
+/* capa */
+.slide.cover{justify-content:center;background:var(--paper)}
+.slide.divider{justify-content:center}
+.brand{font-family:var(--cond);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--blueprint);display:inline-flex;align-items:center;gap:10px}
+.brand::before{content:"";width:22px;height:2px;background:var(--signal)}
+.cover h1{font-family:var(--cond);font-weight:700;font-size:clamp(42px,7.2vw,88px);line-height:.98;letter-spacing:-.02em;margin:22px 0 0;text-wrap:balance;max-width:none}
+.cover .lede{font-size:clamp(18px,1.9vw,23px);color:var(--ink-2);max-width:none;margin:22px 0 0;line-height:1.55}
+.cover-meta{margin-top:34px;display:flex;flex-wrap:wrap;gap:24px 40px;font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.04em}
+.cover-meta b{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px;font-weight:600}
+.cover-meta span{font-family:var(--cond);font-size:15px;color:var(--ink);letter-spacing:0}
+.hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:8px}
+.hint::after{content:"↓";animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* separador de parte */
+.slide.divider{justify-content:center;background:var(--blueprint);color:#F1F4F7;border-bottom:0}
+.slide.divider .kicker-part{color:#F4B07A}
+.slide.divider .kicker-part span{color:rgba(241,244,247,.6)}
+.slide.divider h2{color:#FFFFFF;font-size:clamp(40px,6vw,74px);max-width:none}
+.slide.divider p{color:rgba(241,244,247,.82);font-size:clamp(17px,1.7vw,21px);max-width:none}
+.slide.divider .num{font-family:var(--mono);font-size:clamp(90px,16vw,200px);font-weight:600;color:rgba(255,255,255,.08);position:absolute;right:4vw;bottom:-2vw;line-height:1;letter-spacing:-.04em;pointer-events:none}
+
+/* barra fixa, progresso, navegação */
+.topbar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(14px,3vw,28px);background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);z-index:40}
+.topbar .brand{font-size:12px}
+.topbar .where{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;display:flex;align-items:center;gap:12px}
+.topbar .where b{color:var(--ink);font-weight:600}
+.prog{position:fixed;top:0;left:0;height:3px;background:var(--signal);width:0;z-index:41;transition:width .25s ease}
+.navbtn{position:fixed;left:clamp(8px,1.2vw,18px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:40;align-items:center;opacity:.28;transition:opacity .25s ease}
+.navbtn:hover,.navbtn:focus-within{opacity:1}
+@media (hover:none){.navbtn{opacity:.85}}
+.navbtn .cnt{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em;margin-top:2px}
+.navbtn .cnt b{color:var(--ink)}
+.navbtn button,.menubtn{font-family:var(--mono);font-size:13px;width:42px;height:42px;border-radius:4px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);cursor:pointer;box-shadow:var(--shadow);display:inline-flex;align-items:center;justify-content:center}
+.navbtn button:hover,.menubtn:hover{border-color:var(--blueprint);color:var(--blueprint)}
+.menubtn{font-size:16px}
+.menu{position:fixed;inset:0 auto 0 0;width:min(360px,92vw);background:var(--surface);border-right:1px solid var(--rule);box-shadow:var(--shadow);z-index:45;overflow-y:auto;padding:14px 10px 40px;transform:translateX(-102%);transition:transform .28s ease}
+.menu.open{transform:none}
+.menu .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:14px 10px 4px;border-top:1px solid var(--rule-2);margin-top:6px}
+.menu .grp:first-child{border-top:0;margin-top:0}
+.menu a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink-2);font-family:var(--cond);font-size:14px;padding:6px 10px;border-radius:3px;border-left:2px solid transparent}
+.menu a .n{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);min-width:20px;font-variant-numeric:tabular-nums}
+.menu a:hover{background:var(--blueprint-soft);color:var(--ink)}
+.menu a.on{border-left-color:var(--blueprint);color:var(--blueprint);background:var(--blueprint-soft);font-weight:600}
+.scrim{position:fixed;inset:0;background:rgba(16,23,32,.25);z-index:44;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+
+/* efeitos de entrada — estado de repouso legível; só deslocamento e leve fade */
+.rv{transform:translateY(16px);opacity:.55;transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .55s ease}
+.slide.in .rv{transform:none;opacity:1}
+.slide.in .rv:nth-child(2){transition-delay:.06s}.slide.in .rv:nth-child(3){transition-delay:.12s}.slide.in .rv:nth-child(4){transition-delay:.18s}.slide.in .rv:nth-child(5){transition-delay:.24s}.slide.in .rv:nth-child(6){transition-delay:.30s}
+.slide.cover .rv{transform:none;opacity:1}
+@media (prefers-reduced-motion:reduce){.rv{transform:none;opacity:1;transition:none}.hint::after{animation:none}.prog{transition:none}.menu{transition:none}}
+
+/* figuras leves */
+.shot{border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.shot img{display:block;width:100%;height:auto}
+.sets{position:relative;height:250px;max-width:520px;margin:0 auto;font-family:var(--cond)}
+.sets div{position:absolute;border-radius:50%;border:1.5px solid var(--rule);display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font-size:13px;color:var(--ink-2);text-align:center;line-height:1.3}
+.sets .s1{inset:0;background:var(--surface-2)}
+.sets .s2{inset:12% 15% 8% 15%;background:var(--amber-soft);border-color:var(--amber)}
+.sets .s3{inset:38% 32% 14% 32%;background:var(--signal-soft);border-color:var(--signal);align-items:center;padding:0;font-weight:600;color:var(--signal)}
+.dec{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:20px}
+.dec div{border:1px solid var(--rule);border-radius:4px;padding:12px 14px;background:var(--surface)}
+.dec b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px}
+.dec .h{border-left:3px solid var(--stop)}.dec .h b{color:var(--stop)}
+.dec .p{border-left:3px solid var(--amber)}.dec .p b{color:var(--amber)}
+.dec .m{border-left:3px solid var(--go)}.dec .m b{color:var(--go)}
+.dec ul{margin:0;padding-left:16px;max-width:none}
+.dec li{font-family:var(--cond);font-size:14px;line-height:1.4;margin:4px 0}
+
+/* impressão: um slide por página */
+@page{size:A4 landscape;margin:12mm}
+@media print{
+  html{scroll-snap-type:none}
+  body{background:#fff;color:#101720}
+  .prog,.navbtn,.menubtn,.menu,.scrim,.hint{display:none!important}
+  .slide{min-height:0;height:auto;break-after:page;padding:8mm 4mm;border:0;justify-content:flex-start;overflow:visible}
+  .slide .inner{max-height:none;overflow:visible;zoom:1!important}
+  .slide.divider{background:#17436B!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rv{transform:none;opacity:1}
+  .more{display:block}.more>div{display:block}
+  .term{background:#0B1219!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rule-box,.trap,.case,.note,.pill,.bar-fill,.bar-track,.node,.dec div,.sets div{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .code pre,.term pre{white-space:pre-wrap;word-break:break-word}
+  a{color:inherit;text-decoration:none}
+}
+
+/* limites de altura: um slide por tela */
+.slide .tw{max-height:none;overflow:auto}
+.slide .tw table{font-size:13.5px}
+.slide .tw td,.slide .tw th{padding:8px 11px}
+.slide figure{margin-top:14px}
+.slide .shot img{max-height:34vh;width:auto;max-width:100%;margin:0 auto}
+.slide .code pre,.slide .term pre{max-height:none;overflow:auto;font-size:12px}
+.slide .rule-box,.slide .trap,.slide .case,.slide .note{margin-top:14px;padding:12px 16px}
+.slide .rule-box p,.slide .trap p,.slide .case p,.slide .note p{font-size:14.5px}
+.slide ol,.slide ul{margin-top:10px}
+.slide li{margin:5px 0;font-size:15px}
+.slide h4{margin-top:14px}
+.slide .check{max-height:none}
+.slide .refs{max-height:none}
+.slide .refs li{font-size:13px;padding:6px 0 6px 4px}
+.slide figcaption{font-size:12.5px;margin-top:8px}
+.slide .dec ul{padding-left:14px}.slide .dec li{font-size:13.5px}
+.slide .frame{padding:16px}
+.slide .sets{height:210px}
+@media (max-height:760px){.slide .shot img{max-height:30vh}}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.three figure{margin:0}
+.three .shot img{max-height:none}
+@media (max-width:900px){.three{grid-template-columns:1fr}}
+.slide .node{padding:9px 11px;gap:4px}.slide .node .nt{font-size:14px}.slide .node .nd{font-size:12px}
+
+/* ================= celular e tablet ================= */
+@media (max-width:900px){
+  html{scroll-snap-type:none}
+  .slide{height:auto;min-height:0;overflow:visible;padding:26px 16px 30px;scroll-snap-align:none;font-size:15px}
+  .slide .inner{max-height:none;overflow:visible;zoom:1!important}
+  .slide.cover,.slide.divider{min-height:72vh;padding:40px 18px}
+  .cover h1{font-size:clamp(38px,11vw,60px)}
+  .cover .lede{font-size:17px}
+  .cover-meta{gap:14px 24px}
+  .hint{display:none}
+  .slide h2{font-size:clamp(23px,6.4vw,30px)}
+  .slide .lead{font-size:15.5px}
+  .kicker-part span{display:block;margin-left:0;margin-top:2px}
+  .two,.three{grid-template-columns:minmax(0,1fr);gap:14px}
+  .slide{max-width:100vw;overflow-x:hidden}
+  .slide .inner{min-width:0}
+  .two>*,.three>*{min-width:0}
+  .slide .tw{max-height:none}
+  .slide .tw table{min-width:560px;font-size:13px}
+  .slide .shot img{max-height:none}
+  .slide .code pre,.slide .term pre{max-height:none;font-size:11.5px}
+  .slide .refs,.slide .check{max-height:none}
+  .compare{grid-template-columns:minmax(0,1fr)}.compare>div:first-child{border-right:0;border-bottom:1px solid var(--rule)}
+  .dec{grid-template-columns:minmax(0,1fr)}
+  .flow{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+  .sets{height:200px}
+  .navbtn{left:auto;right:10px;top:auto;bottom:10px;transform:none;flex-direction:row;gap:6px;padding:6px;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow)}
+  .navbtn button,.menubtn{width:38px;height:38px;box-shadow:none}
+  .navbtn .cnt{margin:0 4px 0 2px}
+  .menu{width:100vw;inset:0 0 0 0}
+  .slide.divider .num{font-size:24vw;right:2vw;bottom:-3vw}
+  .rule-box,.trap,.case,.note{padding:12px 14px}
+}
+@media (max-width:480px){
+  .slide{padding:22px 12px 26px}
+  .plate div,.cover-meta div{width:100%}
+  .bar-row{grid-template-columns:minmax(64px,90px) minmax(0,1fr) 46px;gap:6px}
+  .ui-body{grid-template-columns:1fr}.ui-side{border-right:0;border-bottom:1px solid var(--rule)}
+}
+.gl4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:14px}
+.gl{column-count:1}
+.gl{margin:0;font-family:var(--cond);font-size:12.5px;line-height:1.38;columns:2;column-gap:18px}
+.gl dt{break-inside:avoid}.gl dd{break-inside:avoid}
+@media (max-width:640px){.gl{columns:1}}
+.gl dt{font-weight:600;color:var(--blueprint);margin-top:7px}
+.gl dd{margin:1px 0 0;color:var(--ink-2)}
+
+@media (max-width:640px){.gl4{grid-template-columns:minmax(0,1fr)}}
+.menu-head{display:flex;justify-content:space-between;align-items:center;padding:8px 10px 10px;border-bottom:1px solid var(--rule);margin-bottom:6px}
+.menu-head button{font-family:var(--mono);font-size:20px;line-height:1;width:34px;height:34px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--ink-2);cursor:pointer}
+.menu-head button:hover{border-color:var(--blueprint);color:var(--blueprint)}
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:4vh 4vw;background:rgba(16,23,32,.45)}
+.modal.on{display:flex}
+.modal-box{background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow);max-width:1100px;width:100%;max-height:92vh;display:flex;flex-direction:column}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--rule);font-family:var(--cond);font-weight:600;font-size:15px;color:var(--blueprint)}
+.modal-head button{font-family:var(--mono);font-size:20px;line-height:1;width:34px;height:34px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--ink-2);cursor:pointer}
+.modal-body{padding:14px 18px 20px;overflow:auto;font-size:15px}
+.modal-body p,.modal-body li{max-width:none;font-size:15px}
+.modal-body .tw{margin-top:10px}.modal-body .two{margin-top:8px}
+.modal-body .shot img{max-height:60vh;width:auto;max-width:100%}
+/* 4) botão de copiar */
+.code,.term{position:relative}
+.copy{position:absolute;top:6px;right:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 8px;border-radius:3px;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);cursor:pointer;opacity:.75;z-index:2}
+.copy:hover{opacity:1;border-color:var(--blueprint);color:var(--blueprint)}
+.term .copy{background:#141F2B;border-color:#2B3B4C;color:#9FB1C2}
+.copy.ok{color:var(--go);border-color:var(--go)}
+.gterm{text-decoration:underline dotted var(--blueprint-2);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help}
+.gterm:hover,.gterm:focus{background:var(--blueprint-soft);outline:none;border-radius:2px}
+.gpop{position:fixed;z-index:70;max-width:340px;background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-left:3px solid var(--blueprint);border-radius:4px;box-shadow:var(--shadow);padding:10px 12px;font-family:var(--cond);font-size:13.5px;line-height:1.45;display:none;pointer-events:none}
+.gpop.on{display:block}
+.gpop b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--blueprint);margin-bottom:4px}
+@media (hover:none){.gpop{pointer-events:auto}}
+.slide .check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.slide .check .check-foot{grid-column:1/-1}
+.slide .check-item{border-right:1px solid var(--rule-2)}.slide .check-item:nth-child(even){border-right:0}
+.slide .refs{columns:2;column-gap:28px}.slide .refs li{break-inside:avoid}
+#s06 .tw td,#s06 .tw th{padding:6px 10px}
+@media (max-width:900px){.slide .check{grid-template-columns:minmax(0,1fr)}.slide .check-item{border-right:0}.slide .refs{columns:1}}
+
+/* extras deste manual */
+.gantt{display:grid;grid-template-columns:150px repeat(12,minmax(0,1fr));gap:4px 0;font-family:var(--cond);font-size:12.5px;align-items:center}
+.gantt .gl{padding-right:8px;color:var(--ink-2);text-align:right}
+.gantt .gm{font-family:var(--mono);font-size:10px;color:var(--ink-3);text-align:center;border-bottom:1px solid var(--rule);padding-bottom:3px}
+.gantt .gb{height:14px;border-radius:2px;background:var(--blueprint);margin:3px 1px}
+.gantt .gb.s{background:var(--signal)}.gantt .gb.g{background:var(--go)}.gantt .gb.a{background:var(--amber)}
+.cycle{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.cycle .node{align-items:center;text-align:center}
+.struct{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.struct>div{border:1px solid var(--rule);border-radius:4px;background:var(--surface);padding:10px 12px}
+.struct h5{margin:0 0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--blueprint)}
+.struct ol,.struct ul{margin:0;padding-left:16px}.struct li{font-family:var(--cond);font-size:13px;line-height:1.35;margin:2px 0}
+@media (max-width:900px){.struct{grid-template-columns:minmax(0,1fr)}.gantt{grid-template-columns:110px repeat(12,minmax(0,1fr))}}
+
+/* lupa: clique na captura para ampliar */
+.shot img{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(10,14,20,.88);display:none;align-items:center;justify-content:center;padding:3vh 3vw;cursor:zoom-out}
+.lightbox.on{display:flex}
+.lightbox img{max-width:94vw;max-height:88vh;width:auto;height:auto;border-radius:4px;box-shadow:0 12px 40px rgba(0,0,0,.6);background:#fff}
+.lightbox figcaption{position:absolute;left:50%;bottom:1.6vh;transform:translateX(-50%);max-width:90vw;font-family:var(--cond);font-size:13.5px;color:#E3E9EF;text-align:center;line-height:1.4;padding:6px 12px;background:rgba(10,14,20,.6);border-radius:4px}
+.lightbox .lb-close{position:absolute;top:12px;right:14px;width:40px;height:40px;border-radius:4px;border:1px solid rgba(255,255,255,.3);background:rgba(10,14,20,.5);color:#fff;font:20px/1 var(--mono);cursor:pointer}
+.lightbox .lb-hint{position:absolute;top:18px;left:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+@media print{.lightbox{display:none!important}}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+<div class="scrim" id="scrim"></div>
+<div class="gpop" id="gpop" role="tooltip"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-box"><div class="modal-head"><span id="modal-title">detalhes</span><button type="button" id="modal-close" aria-label="Fechar">×</button></div><div class="modal-body" id="modal-body"></div></div></div>
+<nav class="menu" id="menu" aria-label="Sumário"><div class="menu-head"><span class="brand">MirandasTech</span><button type="button" id="menuclose" aria-label="Fechar sumário">×</button></div><div id="menulist"></div></nav>
+<div class="navbtn"><button class="menubtn" id="menubtn" aria-label="Abrir sumário">☰</button><button id="prev" aria-label="Slide anterior">↑</button><button id="next" aria-label="Próximo slide">↓</button><span class="cnt"><b id="cur">1</b>/<span id="tot">–</span></span></div>
+
+
+<main id="deck">
+<!-- ===================== CAPA ===================== -->
+<section class="slide cover" id="s00" data-title="Capa">
+  <div class="inner">
+    <span class="brand rv">MirandasTech · Manual profissional</span>
+    <h1 class="rv">Submissão de artigos, ORCID e Lattes</h1>
+    <p class="lede rv">Do manuscrito pronto ao artigo publicado e registrado: <em>escolher o periódico com critério, preparar carta, declarações e arquivos, submeter, responder aos revisores</em> — e manter o ORCID e o Currículo Lattes atualizados e coerentes entre si e com o artigo. <strong>Com telas datadas, scripts rodados de verdade e cada fato conferido na fonte.</strong></p>
+    <div class="cover-meta rv">
+      <div><b>Série</b><span>Manuais MirandasTech · pesquisa científica</span></div>
+      <div><b>Versão</b><span>1.0 · setembro de 2026</span></div>
+      <div><b>Formato</b><span><span id="nslides">–</span> slides</span></div>
+      <div><b>Licença</b><span>CC BY 4.0 — cite a fonte</span></div>
+    </div>
+  </div>
+  <div class="hint">role para começar</div>
+</section>
+
+<section class="slide" id="s01" data-title="Para quem é e o que você vai aprender">
+  <div class="inner">
+    <div class="kicker-part rv">Como usar<span>cada slide é uma decisão que os autores tomam — o manual organiza, mostra a evidência e pede que você a guarde</span></div>
+    <h2 class="rv">Para quem é — e o que você vai saber fazer ao final</h2>
+    <p class="lead rv">Este manual é para <strong>mestrandos, doutorandos e pesquisadores que vão submeter o primeiro artigo</strong> — ou que já submeteram e querem parar de descobrir as regras no meio do caminho. Ele começa antes da submissão (a identidade do autor: o <span class="gterm" tabindex="0" data-t="ORCID iD" data-d="Identificador único, persistente e gratuito do pesquisador: 16 dígitos em quatro grupos, forma canônica https://orcid.org/…; o último caractere pode ser «X».">ORCID iD</span> e o <span class="gterm" tabindex="0" data-t="Currículo Lattes" data-d="O currículo da Plataforma Lattes do CNPq, lançado em 1999, padrão nacional para agências, programas e universidades; publicado em até 24 horas após o envio.">Currículo Lattes</span>), passa pela escolha do periódico, pela preparação dos arquivos e pela resposta aos revisores, e termina onde a maioria dos tutoriais para: com o artigo publicado <em>registrado</em> nos dois lugares em que o pesquisador é procurado. Tudo o que está aqui foi conferido em 09/09/2026 em páginas públicas; as telas logadas do ORCID foram capturadas com autorização do titular, pixeladas, sem alterar nada no registro; os quatro scripts foram executados de verdade com dados ilustrativos.</p>
+    <div class="two rv">
+      <div>
+        <h4>Ao final, você vai conseguir</h4>
+        <ul class="bul">
+          <li><strong>Criar</strong> (ou reencontrar) o seu <span class="gterm" tabindex="0" data-t="ORCID iD" data-d="Identificador único, persistente e gratuito do pesquisador: 16 dígitos em quatro grupos, forma canônica https://orcid.org/…; o último caractere pode ser «X».">ORCID iD</span>, adicionar trabalhos por <span class="gterm" tabindex="0" data-t="DOI" data-d="Digital Object Identifier: o identificador persistente do artigo, atribuído pelo periódico via Crossref; a chave que casa ORCID e Lattes.">DOI</span>, decidir a <span class="gterm" tabindex="0" data-t="Visibilidade" data-d="Três níveis por item no ORCID — everyone, trusted parties, only me — e um padrão da conta para os itens novos.">visibilidade</span> de cada item e revogar o acesso de um serviço — sem conectar nada que você não tenha lido.</li>
+          <li><strong>Cadastrar e atualizar</strong> o <span class="gterm" tabindex="0" data-t="Currículo Lattes" data-d="O currículo da Plataforma Lattes do CNPq, lançado em 1999, padrão nacional para agências, programas e universidades; publicado em até 24 horas após o envio.">Currículo Lattes</span> pelo fluxo descrito nas Perguntas Frequentes do CNPq, exportar o XML e compará-lo com o ORCID usando o <code>orcid_lattes_diff.py</code>.</li>
+          <li><strong>Escolher</strong> o periódico com o Think. Check. Submit., o <span class="gterm" tabindex="0" data-t="Qualis" data-d="A classificação de periódicos da CAPES usada na avaliação dos programas; no quadriênio 2017-2020, estratos A1–A4, B1–B4 e C.">Qualis</span> na <span class="gterm" tabindex="0" data-t="Sucupira" data-d="A plataforma da CAPES onde se consulta o Qualis Periódicos, por ISSN ou título.">Sucupira</span>, o <span class="gterm" tabindex="0" data-t="DOAJ" data-d="Directory of Open Access Journals: índice de periódicos de acesso aberto, fundado em 2003 em Lund e gerido pela DOAJ Foundation.">DOAJ</span>, o <span class="gterm" tabindex="0" data-t="Open policy finder" data-d="A base da Jisc (antigo Sherpa Romeo) com as políticas de acesso aberto de periódicos, editoras e financiadores: licença e versão que pode ser depositada.">Open policy finder</span> e o <span class="gterm" tabindex="0" data-t="COPE" data-d="Committee on Publication Ethics, fundado em 1997: código de conduta para periódicos e editoras sobre autoria, conflito de interesses e má conduta.">COPE</span> — e ler as instruções aos autores antes de formatar qualquer coisa.</li>
+          <li><strong>Preparar</strong> o checklist de submissão (<code>checklist_submissao.py</code>) e a <span class="gterm" tabindex="0" data-t="Carta de apresentação" data-d="A carta ao editor que acompanha a submissão: aderência ao escopo, contribuição, método, resultado e as declarações.">carta de apresentação</span> com as sete declarações (<code>carta_apresentacao.py</code>), inclusive autoria com <span class="gterm" tabindex="0" data-t="CRediT" data-d="Contributor Roles Taxonomy: 14 papéis de contribuição, padrão ANSI/NISO Z39.104-2022.">CRediT</span>, conflito de interesses, dados e uso de IA.</li>
+          <li><strong>Submeter</strong> num OJS, num Editorial Manager ou num ScholarOne, guardar o número do manuscrito e acompanhar o status.</li>
+          <li><strong>Responder</strong> ponto a ponto a editores e revisores (<code>resposta_revisores.py</code>) e, publicado o artigo, registrá-lo no ORCID e no Lattes com o mesmo <span class="gterm" tabindex="0" data-t="DOI" data-d="Digital Object Identifier: o identificador persistente do artigo, atribuído pelo periódico via Crossref; a chave que casa ORCID e Lattes.">DOI</span>.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra central</span><p><strong>Os autores decidem</strong> — onde submeter, o que declarar, o que tornar público no registro. O manual organiza a decisão, mostra a evidência (a tela, a página, a saída do script) e pede que você a guarde. Onde este manual diz «escolha A», leia «os autores, em conjunto, escolhem A ou B — e registram por quê».</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Submeter a dois periódicos ao mesmo tempo — ou a um periódico predatório.</strong> A submissão simultânea viola a declaração de originalidade e exclusividade que toda <span class="gterm" tabindex="0" data-t="Carta de apresentação" data-d="A carta ao editor que acompanha a submissão: aderência ao escopo, contribuição, método, resultado e as declarações.">carta de apresentação</span> traz; o periódico predatório publica qualquer coisa mediante taxa e o artigo some com ele. As Partes 3 e 5 mostram como evitar os dois: o checklist do Think. Check. Submit. antes, e um periódico de cada vez depois.</p></div>
+        <div class="note"><span class="blabel">Manuais irmãos</span><p>Este manual supõe o manuscrito pronto. Como chegar até ele é assunto de <a href="https://metodologia.mirandastech.com.br/">Metodologia</a>, <a href="https://manual.mirandastech.com.br/">Uso de IA</a>, <a href="https://zotero.mirandastech.com.br/">Zotero</a>, <a href="https://latex.mirandastech.com.br/">LaTeX</a>, <a href="https://cienciaaberta.mirandastech.com.br/">Ciência aberta</a> (<span class="gterm" tabindex="0" data-t="Preprint" data-d="Versão do manuscrito depositada antes da revisão por pares; não deve ser alterada para parecer a versão final; pode ser agrupada com o artigo no ORCID.">preprint</span>, licença, depósito) e <a href="https://git.mirandastech.com.br/">Git</a>; quem orienta lê o <a href="https://orientador.mirandastech.com.br/">Orientador</a>. Hub: <a href="https://www.mirandastech.com.br/pesquisa">mirandastech.com.br/pesquisa</a>.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s02" data-title="Mapa: do manuscrito pronto ao artigo registrado">
+  <div class="inner">
+    <div class="kicker-part rv">Introdução<span>o roteiro do manual segue a ordem em que um artigo é submetido, publicado e registrado</span></div>
+    <h2 class="rv">Mapa: do manuscrito pronto ao artigo publicado e registrado — e onde cada parte do manual entra</h2>
+    <div class="flow rv">
+      <div class="node"><span class="nn">1</span><span class="nt">Manuscrito pronto</span><span class="nd">Texto, figuras, referências e dados revisados pelos autores; vem dos manuais irmãos</span></div>
+      <div class="node"><span class="nn">2</span><span class="nt">Identidade: ORCID + Lattes</span><span class="nd">Um iD por pesquisador, e-mail institucional verificado, nome de citação igual nos dois registros</span></div>
+      <div class="node"><span class="nn">3</span><span class="nt">Escolher o periódico</span><span class="nd">Think. Check. Submit. → <span class="gterm" tabindex="0" data-t="Qualis" data-d="A classificação de periódicos da CAPES usada na avaliação dos programas; no quadriênio 2017-2020, estratos A1–A4, B1–B4 e C.">Qualis</span> → <span class="gterm" tabindex="0" data-t="DOAJ" data-d="Directory of Open Access Journals: índice de periódicos de acesso aberto, fundado em 2003 em Lund e gerido pela DOAJ Foundation.">DOAJ</span> e <span class="gterm" tabindex="0" data-t="Open policy finder" data-d="A base da Jisc (antigo Sherpa Romeo) com as políticas de acesso aberto de periódicos, editoras e financiadores: licença e versão que pode ser depositada.">Open policy finder</span> → <span class="gterm" tabindex="0" data-t="COPE" data-d="Committee on Publication Ethics, fundado em 1997: código de conduta para periódicos e editoras sobre autoria, conflito de interesses e má conduta.">COPE</span> → instruções aos autores</span></div>
+      <div class="node"><span class="nn">4</span><span class="nt">Preparar</span><span class="nd"><code>checklist_submissao.py</code>; carta com sete declarações; <span class="gterm" tabindex="0" data-t="CRediT" data-d="Contributor Roles Taxonomy: 14 papéis de contribuição, padrão ANSI/NISO Z39.104-2022.">CRediT</span>; versão anonimizada; metadados</span></div>
+      <div class="node"><span class="nn">5</span><span class="nt">Submeter</span><span class="nd">OJS, Editorial Manager ou ScholarOne; número do manuscrito; <code>SUBMISSAO.md</code></span></div>
+      <div class="node"><span class="nn">6</span><span class="nt">Revisão e resposta</span><span class="nd">Toda observação tem resposta; <code>resposta_revisores.py</code>; um periódico de cada vez</span></div>
+      <div class="node"><span class="nn">7</span><span class="nt">Aceite e publicação</span><span class="nd">Provas, licença, DOI</span></div>
+      <div class="node gate"><span class="nn">8</span><span class="nt">Registrar</span><span class="nd">ORCID por DOI; Lattes; depósito da versão permitida; <code>orcid_lattes_diff.py</code> sem diferenças</span></div>
+    </div>
+    <div class="two rv">
+      <div class="tw"><table><thead><tr><th style="width:200px">Parte</th><th>O que cobre</th><th style="width:100px">Passos</th></tr></thead><tbody>
+        <tr><td><b>1 ORCID</b></td><td>O que é e os princípios · criar o iD e entrar · busca e <span class="gterm" tabindex="0" data-t="Registro público" data-d="A parte do registro ORCID visível a qualquer pessoa: o que está com visibilidade «Everyone». É o que o editor vê ao clicar no iD.">registro público</span> · «My ORCID» · adicionar trabalhos (menu «Add», DOI, importar de serviços) · e-mails e domínios · <span class="gterm" tabindex="0" data-t="Visibilidade" data-d="Três níveis por item no ORCID — everyone, trusted parties, only me — e um padrão da conta para os itens novos.">visibilidade</span> e 2FA · <span class="gterm" tabindex="0" data-t="Partes confiáveis" data-d="Organizações e pessoas a quem você deu permissão de interagir com o iD e o registro; listadas em «Trusted parties», revogáveis a qualquer momento.">partes confiáveis</span></td><td>Passo 2</td></tr>
+        <tr><td><b>2 Lattes</b></td><td>O que é · cadastrar, atualizar e entrar · busca textual · estrutura e fluxo pelas FAQ · ORCID no Lattes · exportar o XML e comparar · o que não mostramos e por quê</td><td>Passo 2</td></tr>
+        <tr><td><b>3 Escolher o periódico</b></td><td>Think. Check. Submit. · Qualis na <span class="gterm" tabindex="0" data-t="Sucupira" data-d="A plataforma da CAPES onde se consulta o Qualis Periódicos, por ISSN ou título.">Sucupira</span> · DOAJ e Open policy finder · COPE e <span class="gterm" tabindex="0" data-t="Similarity Check" data-d="Serviço do Crossref, movido pelo iThenticate, que dá ao editor um relatório de similaridade; similaridade não é plágio — quem julga é o editor.">Similarity Check</span> · perfis não são identificadores · ler as instruções aos autores</td><td>Passo 3</td></tr>
+        <tr><td><b>4 Preparar e submeter</b></td><td>Os sistemas · o checklist · a carta e as sete declarações · autoria e CRediT · versão anonimizada e metadados · depois de clicar em enviar</td><td>Passos 4 e 5</td></tr>
+        <tr><td><b>5 Revisão, decisão e publicação</b></td><td>Tipos de revisão e decisões · responder ponto a ponto · rejeição e aceite · publicado: registrar e depositar · manter os dois registros coerentes</td><td>Passos 6, 7 e 8</td></tr>
+        <tr><td><b>6 Fechar</b></td><td>O plugin · erros comuns · checklist · glossário · referências · como citar</td><td>Todos</td></tr>
+      </tbody></table></div>
+      <div>
+        <div class="rule-box"><span class="blabel">Como ler</span><p>Quem nunca teve ORCID nem Lattes lê em ordem. Quem já tem os dois e está com o manuscrito na mão vai à Parte 3. Quem acabou de receber a decisão do editor vai direto à Parte 5 — e volta à Parte 1 quando o artigo sair, porque é lá que ele precisa ser registrado.</p></div>
+        <div class="note"><span class="blabel">Convenções</span><p>Nomes de páginas e botões entre «aspas angulares». Capturas públicas em 1920 × 938, feitas em 09/09/2026 sem login. Telas logadas do ORCID: tela logada, dados pessoais pixelados; nada foi alterado no registro (nenhum trabalho adicionado, nenhum serviço conectado, nenhuma configuração salva). Não há telas logadas do Lattes: o editor só abre com login, e o manual descreve o fluxo pelas páginas públicas e pelas Perguntas Frequentes do CNPq. Figuras de terminal: execução real dos scripts, caminho trocado por <code>/home/usuario</code>, dados ilustrativos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 1 ===================== -->
+<section class="slide divider" id="s03" data-title="Parte 1 · ORCID"><div class="inner"><div class="kicker-part rv">Parte 1<span>ORCID</span></div><h2 class="rv">O que é e os princípios; criar o iD e entrar; a busca e o registro público; «My ORCID»; adicionar trabalhos; e-mails e domínios; visibilidade e 2FA; partes confiáveis</h2><p class="rv">Um identificador gratuito e persistente que distingue você de todos os homônimos — e um registro que você controla. Nove slides com as páginas públicas da ORCID e da central de ajuda, mais sete telas logadas capturadas com autorização, pixeladas, sem alterar nada no registro. A regra que atravessa a parte inteira: um pesquisador, um iD; e nunca conecte um serviço sem ler o que ele poderá escrever.</p></div><div class="num">01</div></section>
+
+<section class="slide" id="s04" data-title="O que é ORCID e os princípios">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>1 de 9 · info.orcid.org/what-is-orcid (pt) · orcid.org · capturas de 09/09/2026</span></div>
+    <h2 class="rv">O que é ORCID: um iD gratuito e persistente, um registro que o pesquisador controla e APIs para as organizações membros</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_23_orcid_about.jpg" width="1920" height="938" alt="Página O que é ORCID em português no site info.orcid.org, com a definição da organização sem fins lucrativos, os três serviços (ORCID iD, registro e APIs) e os princípios"></div><figcaption><b>Figura 1</b> «O que é ORCID», em português (captura de 09/09/2026, sem login): «ORCID, que significa Open Researcher and Contributor ID, é uma organização global sem fins lucrativos sustentada por taxas de nossas organizações membros». Três serviços: «O ORCID iD: um identificador único e persistente gratuito para pesquisadores»; «um registro ligado ao ORCID iD»; e APIs para interoperar com as organizações membros.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_01_orcid_home.jpg" width="1920" height="938" alt="Página inicial de orcid.org com o texto ORCID is for Researchers, os botões de registro e entrada e a busca do registro"></div><figcaption><b>Figura 2</b> A página inicial de orcid.org (captura de 09/09/2026, sem login): «ORCID is for… Researchers», com os acessos a registrar-se, entrar e buscar o registro. É por aqui que se cria o iD (slide seguinte) e que qualquer pessoa consulta a parte pública de um registro.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Princípios que a página afirma</span><p>«Os pesquisadores serão capazes de criar, editar e manter um ORCID identificador e registro gratuitos»; «Os pesquisadores controlarão as configurações de privacidade»; os dados públicos são liberados anualmente sob CC0; o software é livre. Na prática: o iD é seu, de graça, para sempre — e o que aparece nele é decisão sua, item por item (slide «Visibilidade»).</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">Números, com a ressalva</span><p>Segundo o relatório anual 2025 da ORCID, citado por terceiros, há «mais de 10,6 milhões» de pesquisadores ativos e «1.492 organizações membros em 192 países». A página do relatório devolveu 403 ao robô em 09/09/2026; por isso o manual cita os números com essa ressalva e não afirma nada além deles.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s05" data-title="Criar o iD e entrar">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>2 de 9 · orcid.org/register · orcid.org/signin · capturas de 09/09/2026</span></div>
+    <h2 class="rv">Criar o iD e entrar: «Create your ORCID iD» em quatro passos — mas antes, confira se você já tem um</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_02_orcid_register.jpg" width="1920" height="938" alt="Formulário Create your ORCID iD, Step 1 of 4 - Names and emails, com os campos Given names, Family names (optional), Primary email e Confirm primary email e o aviso para verificar se já existe um iD"></div><figcaption><b>Figura 3</b> «Create your ORCID iD», «Step 1 of 4 - Names and emails» (captura de 09/09/2026, sem login): campos «Given names», «Family names (optional)», «Primary email» e «Confirm primary email», e o aviso para verificar se você já tem um iD antes de criar outro. Nenhum registro foi criado para este manual.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_03_orcid_signin.jpg" width="1920" height="938" alt="Página Sign in to ORCID com o campo Email or 16-digit ORCID iD, o campo de senha, a opção Sign in through your institution e a entrada por conta social"></div><figcaption><b>Figura 4</b> «Sign in to ORCID» (captura de 09/09/2026, sem login): entra-se com «Email or 16-digit ORCID iD» e senha, por «Sign in through your institution» ou por conta social. Se a instituição oferece a entrada institucional, ela vincula o iD ao vínculo — e é a forma que menos depende de lembrar senha.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Antes de clicar em «Create your ORCID iD», busque o seu nome no registro (slide seguinte) e procure na caixa de e-mail antiga por «ORCID». O segundo iD é o erro mais comum e o mais difícil de desfazer: a central de ajuda tem uma página só para «I have more than one ORCID iD» (slide «<span class="gterm" tabindex="0" data-t="Partes confiáveis" data-d="Organizações e pessoas a quem você deu permissão de interagir com o iD e o registro; listadas em «Trusted parties», revogáveis a qualquer momento.">Partes confiáveis</span>»). Use como e-mail principal um endereço que você não vai perder — e acrescente o institucional depois, verificado.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">O formato do iD</span><p>Dezesseis dígitos em quatro grupos de quatro; o último caractere pode ser «X», que é dígito verificador. A forma canônica é a URL <code>https://orcid.org/…</code> — é assim que ele vai na assinatura, no sistema de submissão e no Lattes. O iD de teste da própria ORCID, 0000-0002-1825-0097, pertence a um pesquisador fictício e é o que os scripts deste manual usam.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s06" data-title="A busca do registro e o registro público">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>3 de 9 · orcid.org/orcid-search · registro público · capturas de 09/09/2026</span></div>
+    <h2 class="rv">A busca do registro e o registro público: o que qualquer pessoa vê de você — e por que isso decide como você vai preencher o resto</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_04_orcid_search.jpg" width="1920" height="938" alt="Resultado da busca do registro ORCID pelo termo matias, com a mensagem Showing 50 of 10062 results e a tabela com as colunas ORCID ID, First Name, Last Name, Other Names e Affiliations, dados pixelados"></div><figcaption><b>Figura 5</b> A busca do registro por «matias» (captura de 09/09/2026, sem login; dados da tabela pixelados): «Showing 50 of 10062 results», com as colunas «ORCID ID», «First Name», «Last Name», «Other Names» e «Affiliations». Dez mil registros para um sobrenome: é exatamente o problema que o iD resolve.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_05_orcid_public_record.jpg" width="1920" height="938" alt="Registro público ORCID com cabeçalho pixelado: nome publicado, Also known as, afiliação, o iD com os botões de copiar e imprimir, Show record summary, e as seções Personal information e Activities com Employment e a coluna Source"></div><figcaption><b>Figura 6</b> Um registro público (captura de 09/09/2026, sem login; cabeçalho e afiliação pixelados): nome publicado, «Also known as», afiliação, o iD com botões de copiar e imprimir e «Show record summary»; abaixo, «Personal information» e «Activities» — «Employment» com a coluna «Source», que diz quem escreveu cada item.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O <span class="gterm" tabindex="0" data-t="Registro público" data-d="A parte do registro ORCID visível a qualquer pessoa: o que está com visibilidade «Everyone». É o que o editor vê ao clicar no iD.">registro público</span> é o que o editor, o avaliador de bolsa e o coautor veem quando clicam no seu iD. Por isso, o nome publicado tem de ser o nome com que você assina artigos, «Also known as» recebe as outras grafias, e o vínculo de emprego atual precisa estar lá com a fonte visível. Tudo o que estiver «Only me» simplesmente não existe para quem consulta.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">A coluna «Source»</span><p>Cada item do registro diz quem o escreveu: você, uma organização confiável (a universidade, o Crossref) ou um serviço conectado. É a mesma informação que a API pública devolve — e o que o <code>orcid_lattes_diff.py</code> lê (Parte 2).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s07" data-title="A tela «My ORCID»">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>4 de 9 · tela logada «My ORCID» · captura de 09/09/2026, pixelada</span></div>
+    <h2 class="rv">A tela «My ORCID»: o que cada bloco guarda, o que é obrigatório para aparecer e o que ainda está vazio num registro novo</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_orcid_01_my_orcid.jpg" width="1920" height="990" alt="Tela My ORCID logada, com a coluna esquerda (iD, Preview public record, Emails & domains, Verified email domains, Websites & social links, Keywords, Countries) e o centro com Names, Biography e Activities: Employment (1), Education and qualifications (0), Professional activities (0), Funding (0), Featured works e Works (0); dados pessoais pixelados"></div><figcaption><b>Figura 7</b> «My ORCID» (captura de 09/09/2026; tela logada, dados pessoais pixelados; nada foi alterado no registro): à esquerda, o iD, «Preview public record», «Emails &amp; domains» com o ícone de visibilidade «Only me», «Verified email domains», «Websites &amp; social links», «Keywords», «Countries»; ao centro, «Names», «Biography» e «Activities» — «Employment (1)», «Education and qualifications (0)», «Professional activities (0)», «Funding (0)», «Featured works» e «Works (0)». Cada seção tem «Add» e «Sort».</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:200px">Bloco</th><th>O que guarda</th><th style="width:210px">Para submeter um artigo</th></tr></thead><tbody>
+          <tr><td><b>Names</b></td><td>«Published Name», «Name», «Also known as» — cada um com o próprio ícone de visibilidade</td><td>O nome publicado é o que vai na autoria; as outras grafias em «Also known as»</td></tr>
+          <tr><td><b>Emails &amp; domains</b></td><td>Endereços com «Source», «Verified» e visibilidade; domínios verificados</td><td>Ter o institucional verificado — o sistema de submissão vai pedir</td></tr>
+          <tr><td><b>Employment</b></td><td>Vínculo atual, com fonte</td><td>A afiliação do artigo tem de bater com esta</td></tr>
+          <tr><td><b>Works</b></td><td>Os trabalhos, agrupados por identificador</td><td>É onde o artigo publicado entra, por DOI (slide 6 desta parte)</td></tr>
+          <tr><td><b>Featured works</b></td><td>«Add your works to enable featuring — You need to add at least one work»</td><td>Vazio num registro novo; opcional</td></tr>
+          <tr><td><b>Funding · Education · Professional activities</b></td><td>Financiamentos, formação, atividades</td><td>Úteis para o Lattes bater com o ORCID; não são exigidos pelo periódico</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O mínimo para submeter: nome publicado igual ao da autoria, um e-mail institucional verificado e o vínculo de emprego atual — visíveis para «Everyone». O resto se preenche com o tempo; o «Preview public record» mostra exatamente o que os outros veem, e é o botão a clicar antes de mandar o iD para qualquer lugar.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s08" data-title="Adicionar trabalhos: o menu «Add» e o DOI">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>5 de 9 · telas logadas «Add» e «Add work from DOI» · capturas de 09/09/2026, pixeladas</span></div>
+    <h2 class="rv">Adicionar trabalhos: o menu «Add» oferece cinco caminhos — e o DOI é o que menos erra, porque os metadados vêm de quem publicou</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_orcid_02_works_add_menu.jpg" width="1920" height="942" alt="Menu Add da seção Works na tela My ORCID, com as opções Import works from other services, Import works from a BibTeX file, Add work with a DOI, Add work with a PubMed ID e Add work manually; dados pessoais pixelados"></div><figcaption><b>Figura 8</b> O menu «Add» de «Works» (captura de 09/09/2026; tela logada, dados pessoais pixelados; nada foi alterado no registro): «Import works from other services — Connect with services that can help keep your ORCID record up-to-date»; «Import works from a BibTeX file»; «Add work with a DOI»; «Add work with a PubMed ID»; «Add work manually — Enter the work details yourself».</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_orcid_03_add_doi_dialog.jpg" width="1920" height="942" alt="Diálogo Works - Add work from DOI, com a instrução You can use the full DOI URL or just the identifier value, o campo DOI identifier value or full URL e o botão Retrieve work details from DOI; dados pessoais pixelados"></div><figcaption><b>Figura 9</b> «Works - Add work from DOI» (captura de 09/09/2026; tela logada, dados pessoais pixelados; nada foi alterado no registro): «You can use the full DOI URL or just the identifier value», o campo «DOI identifier value or full URL» e o botão «Retrieve work details from DOI». O diálogo foi fechado sem adicionar nada.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Artigo publicado com DOI entra pelo DOI: cole o identificador ou a URL, clique em «Retrieve work details from DOI», confira título, periódico e ano e salve. Os metadados vêm do registro do DOI, não de digitação — é o caminho que deixa o ORCID igual ao artigo. O BibTeX serve para lotes (o manual de Zotero exporta um); o manual só para o que não tem identificador nenhum.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">O que a central de ajuda diz</span><p>«Works are your research outputs, including publications, data sets, conference presentations and more. The maximum number of works you can add to your ORCID record is 10,000.» — e há «five different options to add works», as cinco do menu. Versões diferentes do mesmo trabalho (<span class="gterm" tabindex="0" data-t="Preprint" data-d="Versão do manuscrito depositada antes da revisão por pares; não deve ser alterada para parecer a versão final; pode ser agrupada com o artigo no ORCID.">preprint</span> e artigo) podem ser agrupadas: a página «Group multiple versions» da central explica.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s09" data-title="Importar de serviços e a central de ajuda">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>6 de 9 · tela logada «Import your works» · support.orcid.org «Add works to your ORCID record» · capturas de 09/09/2026</span></div>
+    <h2 class="rv">Importar de serviços: cada «Connect now» é uma permissão de escrita no seu registro — leia o que o serviço vai fazer antes de conceder</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_orcid_07_import_services.jpg" width="1920" height="990" alt="Diálogo Import your works com a lista ORCID Certified Services (The Lens, Web of Science) e More Services (15) com Scopus - Elsevier, Crossref Metadata Search, BASE e OpenAIRE, cada um com o botão Connect now; dados pessoais pixelados"></div><figcaption><b>Figura 10</b> «Import your works» (captura de 09/09/2026; tela logada, dados pessoais pixelados; nada foi alterado no registro — nenhum serviço foi conectado): «Connect to a service to grant permission and add selected research outputs to your ORCID record». «ORCID Certified Services»: The Lens («add patents and other scholarly works and automatically update your ORCID record over time»), Web of Science; «More Services (15)»: Scopus - Elsevier («add your Scopus Author ID»), Crossref Metadata Search («Search by title, author, DOI, or ORCID iD…»), BASE, OpenAIRE… Cada um com «Connect now».</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_06_orcid_help_works.jpg" width="1920" height="938" alt="Artigo Add works to your ORCID record na central de ajuda da ORCID, com o índice lateral (Getting started, Updating your record, Works, Affiliations, Managing your account, Account settings, Technical resources, Re-using your data) e o texto sobre as cinco opções"></div><figcaption><b>Figura 11</b> «Add works to your ORCID record», na central de ajuda (captura de 09/09/2026, sem login): o índice cobre «Getting started», «Updating your record» (atualizações automáticas por Crossref, DataCite, Web of Science e pela instituição), «Works», «Affiliations», «Managing your account» (desativação, contas duplicadas, delegação, organizações confiáveis), «Account settings», «Technical resources» e «Re-using your data».</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p><strong>Nunca conecte um serviço sem ler o que ele poderá escrever no seu registro.</strong> «Connect now» concede uma permissão que o serviço usa depois, sem você olhar — «automatically update your ORCID record over time», nas palavras da própria lista. Conecte só o que você reconhece (o Crossref, a base em que o artigo está indexado), confira o que entrou e revogue o que não usa mais em «Trusted parties» (slide 9 desta parte).</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">Um exemplo real, sem conta nenhuma</span><p>O iD de teste da ORCID (0000-0002-1825-0097, pesquisador fictício) tem seis trabalhos públicos, com três fontes: o próprio titular, «Crossref Metadata Search» e «Scopus - Elsevier». É o que a API pública devolve para qualquer iD, sem chave — e o que a Parte 2 compara com o Lattes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s10" data-title="E-mails e domínios">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>7 de 9 · tela logada «Emails &amp; domains» · captura de 09/09/2026, pixelada</span></div>
+    <h2 class="rv">E-mails e domínios: mais de um endereço para não perder o acesso — e o domínio verificado no lugar do e-mail inteiro no registro público</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_orcid_04_emails_dialog.jpg" width="1920" height="942" alt="Diálogo Emails & domains com a lista de endereços (cada um com Source, Verified e visibilidade Only me), o botão Add another email address, a seção Verified email domains, Email notifications e os botões Save changes e Cancel; endereços pixelados"></div><figcaption><b>Figura 12</b> «Emails &amp; domains» (captura de 09/09/2026; tela logada, dados pessoais pixelados; nada foi alterado no registro — o diálogo foi fechado com «Cancel»): «Having multiple email addresses helps you maintain access to your ORCID record. A mix of personal and professional email addresses works best.» Cada e-mail com «Source», «Verified» e visibilidade («Only me»); «Add another email address»; «Verified email domains»; «Email notifications».</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:190px">Elemento</th><th>O que faz</th><th style="width:230px">Decisão dos autores</th></tr></thead><tbody>
+          <tr><td><b>Mais de um e-mail</b></td><td>Cada um recebe «Verified» ao confirmar o link enviado</td><td>Um pessoal permanente + o institucional atual: quando um vínculo acaba, o acesso não acaba junto</td></tr>
+          <tr><td><b>Visibilidade por e-mail</b></td><td>Padrão «Only me»: o endereço não aparece no registro público</td><td>Pode ficar assim; o periódico pede o e-mail no próprio sistema</td></tr>
+          <tr><td><b>Verified email domains</b></td><td>«When we verify a professional email address we will add the associated domain to your record. You can choose to show an email domain on your public record instead of the full email address»</td><td>Mostrar o domínio da instituição e esconder o endereço: prova o vínculo sem expor a caixa de entrada</td></tr>
+          <tr><td><b>Email notifications</b></td><td>Qual endereço recebe os avisos (inclusive «alguém adicionou um trabalho ao seu registro»)</td><td>O que você lê todo dia</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O e-mail institucional verificado é o que muitos sistemas de submissão e financiadores usam para reconhecer o vínculo; o pessoal é o que garante que você entra de novo quando mudar de instituição. Os dois, verificados — e o domínio visível no registro público.</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Só o e-mail institucional, e o vínculo acabou.</strong> Sem outro endereço verificado, a recuperação de senha vai para uma caixa que não existe mais. Adicione o segundo e-mail hoje, não no dia da mudança.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s11" data-title="Visibilidade padrão e 2FA">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>8 de 9 · tela logada «Account settings» · support.orcid.org «Visibility settings» · capturas de 09/09/2026</span></div>
+    <h2 class="rv">Visibilidade padrão e autenticação em dois fatores: três níveis por item, um padrão para os novos — e a segurança da conta que assina os seus artigos</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_orcid_05_account_visibility.jpg" width="1920" height="942" alt="Tela Account settings com Defaults (Notification email frequency, Language, Visibility com as opções Everyone 87% of users choose this, Trusted Organizations 5%, Only me 8%) e Security (Account password, Two-factor authentication OFF); dados pessoais pixelados"></div><figcaption><b>Figura 13</b> «Account settings» (captura de 09/09/2026; tela logada, dados pessoais pixelados; nada foi alterado no registro): em «Defaults», a pergunta «By default, what visibility should be given to new items added to your ORCID Record?» com «Everyone (87% of users choose this)», «Trusted Organizations (5% of users choose this)» e «Only me (8% of users choose this)»; em «Security», «Account password» e «Two-factor authentication (OFF)».</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_07_orcid_help_visibility.jpg" width="1920" height="938" alt="Artigo Visibility settings na central de ajuda da ORCID, com o texto sobre o controle individual como princípio do programa ORCID Trust e os três níveis de visibilidade: everyone, trusted parties, only me"></div><figcaption><b>Figura 14</b> «Visibility settings», na central de ajuda (captura de 09/09/2026, sem login): «Individual control is a core principle of the ORCID Trust program»; «There are three visibility settings: everyone, trusted parties, or only me». O padrão da conta vale para os itens novos; cada item existente tem o seu próprio ícone.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Para quem publica, o padrão útil é «Everyone»: um trabalho «Only me» não é visto pelo editor nem pelo Lattes de ninguém, e um registro em que tudo está oculto equivale a não ter registro. O que merece «Trusted Organizations» ou «Only me» é decisão item a item — o e-mail, por exemplo. A decisão é sua; a tela diz o que a maioria escolhe, e nada mais.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">2FA</span><p>«Two-factor authentication (OFF)» na conta capturada — e o manual não ligou, porque nada foi alterado. Ligue na sua: o iD é a chave que os sistemas de submissão usam para vincular a autoria a você, e a conta que o controla merece o segundo fator. A página «two-factor» da central de ajuda descreve o procedimento.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s12" data-title="Partes confiáveis e «um pesquisador, um iD»">
+  <div class="inner">
+    <div class="kicker-part rv">ORCID<span>9 de 9 · tela logada «Trusted parties» · support.orcid.org «Duplicate accounts» · captura de 09/09/2026, pixelada</span></div>
+    <h2 class="rv">Partes confiáveis: quem pode escrever no seu registro, como revogar — e a regra que fecha a parte: um pesquisador, um iD</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_orcid_06_trusted_parties.jpg" width="1920" height="942" alt="Tela Trusted parties com as seções Trusted organizations (exemplo: GitHub, Access granted 2026-08-24, botão Revoke access), Trusted individuals (Account Delegates) e Users that trust you; dados pessoais pixelados"></div><figcaption><b>Figura 15</b> «Trusted parties» (captura de 09/09/2026; tela logada, dados pessoais pixelados; nada foi alterado no registro): «Trusted organizations are those to which you have granted permission to interact with your iD and record, e.g. when submitting a manuscript or grant application. You decide whether to grant this access and you may revoke it at any time.» Um exemplo real na conta: GitHub, «Access granted: 2026-08-24», com o botão «Revoke access». Abaixo, «Trusted individuals» e «Users that trust you».</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:200px">Seção</th><th>O que é</th><th style="width:230px">Quando aparece</th></tr></thead><tbody>
+          <tr><td><b>Trusted organizations</b></td><td>Organizações às quais você deu permissão de interagir com o iD e o registro; cada linha tem a data e «Revoke access»</td><td>Ao submeter um manuscrito com o iD, ao pedir bolsa, ao conectar um serviço de importação</td></tr>
+          <tr><td><b>Trusted individuals</b></td><td>«Trusted individuals, also known as Account Delegates, are other ORCID iD holders to whom you have granted permission to update your ORCID record.»</td><td>Um assistente ou bibliotecário que atualiza o registro por você — sem a sua senha</td></tr>
+          <tr><td><b>Users that trust you</b></td><td>Quem fez de você um <span class="gterm" tabindex="0" data-t="Delegado" data-d="«Trusted individual» ou «Account Delegate»: outro titular de iD autorizado a atualizar o seu registro, sem a sua senha.">delegado</span></td><td>Quando você atualiza o registro de outra pessoa</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra: um pesquisador, um iD</span><p>Se você descobrir dois iDs em seu nome, não abandone um: a central de ajuda tem a página «I have more than one ORCID iD» (em «Managing your account», «Duplicate accounts») com o procedimento para unir os registros. Dois iDs ativos significam artigos divididos, um Lattes que aponta para o errado e um sistema de submissão que não reconhece o autor.</p></div>
+        <div class="note"><span class="blabel">Revise uma vez por ano</span><p>Abra «Trusted parties», leia cada linha e revogue o que você não reconhece ou não usa. A permissão de escrita continua valendo enquanto você não a retirar.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 2 ===================== -->
+<section class="slide divider" id="s13" data-title="Parte 2 · Lattes"><div class="inner"><div class="kicker-part rv">Parte 2<span>Lattes</span></div><h2 class="rv">O que é o Currículo Lattes; cadastrar, atualizar e entrar; a busca textual; estrutura e fluxo pelas FAQ; ORCID no Lattes; exportar o XML e comparar; o que não mostramos e por quê</h2><p class="rv">O registro em que as agências, os programas e as universidades do país procuram o pesquisador — descrito aqui pelas páginas públicas do CNPq e pelas Perguntas Frequentes, porque o editor do currículo só abre com login e este manual não pede credenciais de ninguém. O que dá para fazer sem abrir o editor: buscar, entender a estrutura, e comparar o XML exportado com o ORCID.</p></div><div class="num">02</div></section>
+
+<section class="slide" id="s14" data-title="O que é o Currículo Lattes">
+  <div class="inner">
+    <div class="kicker-part rv">Lattes<span>1 de 6 · lattes.cnpq.br · gov.br/cnpq (Plataforma Lattes) · captura de 09/09/2026</span></div>
+    <h2 class="rv">O que é o Currículo Lattes: desde 1999 «um padrão nacional no registro da vida pregressa e atual dos estudantes e pesquisadores do país»</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_08_lattes_home.jpg" width="1920" height="938" alt="Portal lattes.cnpq.br, Plataforma Lattes com o CNPq, com o bloco Acesso direto (Currículo Lattes: Buscar currículo, Atualizar currículo, Cadastrar novo currículo; Diretório de Instituições; Diretório dos Grupos de Pesquisa; Painel Lattes; Repositório de Dados; Extração de dados) e o banner Dúvidas ao preencher o Lattes?"></div><figcaption><b>Figura 16</b> O portal lattes.cnpq.br (captura de 09/09/2026, sem login): «Plataforma Lattes», com o «Acesso direto» a «Buscar currículo», «Atualizar currículo» e «Cadastrar novo currículo», aos Diretórios de Instituições e dos Grupos de Pesquisa, ao Painel Lattes, ao Repositório de Dados e à «Extração de dados» (Extrator Lattes); o banner «Dúvidas ao preencher o Lattes?» leva às Perguntas Frequentes; o carrossel mostra Scopus, Web of Knowledge, Thomson Reuters e ResearcherID.</figcaption></figure>
+      <div>
+        <p class="lead">A página da Plataforma Lattes no <span class="gterm" tabindex="0" data-t="gov.br" data-d="A conta única dos serviços federais; uma das formas de entrar no Lattes (as FAQ citam também CPF ou e-mail e senha).">gov.br</span>/cnpq a descreve como «a maior base de dados da ciência brasileira», que integra «bases de dados de Currículos, de Grupos de pesquisa e de Instituições». O Currículo Lattes foi lançado em <strong>1999</strong> e «se tornou um padrão nacional no registro da vida pregressa e atual dos estudantes e pesquisadores do país», «adotado pela maioria das instituições de fomento, universidades e institutos de pesquisa do País». São cerca de 8 milhões de currículos, segundo o CNPq (2023).</p>
+        <div class="tw"><table><thead><tr><th style="width:230px">Acesso direto</th><th>Para quê</th></tr></thead><tbody>
+          <tr><td><b>Buscar currículo</b></td><td>A busca textual pública (slide 3 desta parte)</td></tr>
+          <tr><td><b>Atualizar currículo</b></td><td>O editor, com login — o que o manual não mostra</td></tr>
+          <tr><td><b>Cadastrar novo currículo</b></td><td>O serviço gratuito do <span class="gterm" tabindex="0" data-t="gov.br" data-d="A conta única dos serviços federais; uma das formas de entrar no Lattes (as FAQ citam também CPF ou e-mail e senha).">gov.br</span>: «Qualquer pessoa pode utilizar este serviço»</td></tr>
+          <tr><td><b>Extração de dados</b></td><td>O <span class="gterm" tabindex="0" data-t="Extrator Lattes" data-d="O serviço de «Extração de dados» da Plataforma Lattes, para consultas em lote sobre a base.">Extrator Lattes</span>, para consultas em lote sobre a base</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O ORCID é onde o mundo procura o autor; o Lattes é onde o Brasil procura — o programa de pós, a agência de fomento, a banca, o edital. Um artigo publicado que não está no Lattes não conta para nenhum deles; um que está com o DOI errado conta como outro artigo. Os dois registros têm de dizer a mesma coisa, e a Parte 2 termina com o script que confere isso.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s15" data-title="Cadastrar, atualizar e entrar">
+  <div class="inner">
+    <div class="kicker-part rv">Lattes<span>2 de 6 · gov.br · Perguntas Frequentes do CNPq · captura de 09/09/2026</span></div>
+    <h2 class="rv">Cadastrar, atualizar e entrar: o fluxo das Perguntas Frequentes — login, editar, enviar ao CNPq, e «a publicação do currículo ocorre em até 24 horas»</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_11_govbr.jpg" width="1920" height="938" alt="Portal gov.br, Serviços e Informações do Brasil, com o botão Entrar com gov.br e o aviso de cookies aberto"></div><figcaption><b>Figura 17</b> O portal gov.br (captura de 09/09/2026, sem login): «Serviços e Informações do Brasil» e o botão «Entrar com gov.br». A conta gov.br é a identidade usada nos serviços federais e é uma das formas de entrar no Lattes — as FAQ citam também CPF ou e-mail e senha. O aviso de cookies foi deixado como estava.</figcaption></figure>
+      <div>
+        <div class="flow">
+          <div class="node"><span class="nn">1</span><span class="nt">Plataforma Lattes</span><span class="nd">lattes.cnpq.br → «Atualizar currículo» (ou «Cadastrar novo currículo» em wwws.cnpq.br/cvlattesweb, gratuito)</span></div>
+          <div class="node"><span class="nn">2</span><span class="nt">Login</span><span class="nd">CPF ou e-mail e senha; o portal também oferece a conta gov.br</span></div>
+          <div class="node"><span class="nn">3</span><span class="nt">Editar</span><span class="nd">Os módulos do currículo (slide 4 desta parte)</span></div>
+          <div class="node gate"><span class="nn">4</span><span class="nt">Enviar ao CNPq</span><span class="nd">«A publicação do currículo ocorre em até 24 horas»</span></div>
+        </div>
+        <div class="tw"><table><thead><tr><th style="width:200px">Situação (FAQ do CNPq)</th><th>O que a FAQ diz</th></tr></thead><tbody>
+          <tr><td><b>Esqueceu a senha</b></td><td>«Esqueceu sua senha?» envia um token por e-mail, com validade de 5 minutos</td></tr>
+          <tr><td><b>E-mail desatualizado</b></td><td>O endereço fica em «Dados Gerais &gt; Endereço Eletrônico» — se ele mudou, o token não chega</td></tr>
+          <tr><td><b>Currículo bloqueado</b></td><td>Por excesso de tentativas de validação, a pedido do usuário ou por inatividade prolongada; o desbloqueio é pela Central de Atendimento</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Mantenha o e-mail do Lattes igual ao e-mail que você lê: é para ele que vai o token de 5 minutos. E envie ao CNPq depois de cada alteração — o que fica salvo no editor sem envio não é publicado, e «até 24 horas» conta a partir do envio.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s16" data-title="A busca textual">
+  <div class="inner">
+    <div class="kicker-part rv">Lattes<span>3 de 6 · buscatextual.cnpq.br · captura de 09/09/2026</span></div>
+    <h2 class="rv">A busca textual: como os outros encontram você no Lattes — por nome ou por assunto, nas bases de doutores e de demais pesquisadores</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_09_lattes_busca.jpg" width="1920" height="938" alt="Página Buscar Currículo Lattes (Busca Simples) em buscatextual.cnpq.br, com os campos Nome e Assunto, as opções Nas bases: Doutores e Demais pesquisadores, Nacionalidade, País e o link para a Busca Avançada"></div><figcaption><b>Figura 18</b> «Buscar Currículo Lattes (Busca Simples)» (captura de 09/09/2026, sem login): por «Nome» ou por «Assunto» («Título ou palavra chave da produção»), «Nas bases: Doutores / Demais pesquisadores (Mestres, Graduados, Estudantes, Técnicos, etc.)», com filtros de nacionalidade e país e a «Busca Avançada». Versão do sistema visível no rodapé: 2.0.14.127-4.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:190px">Campo</th><th>O que busca</th><th style="width:230px">O que isso implica no seu currículo</th></tr></thead><tbody>
+          <tr><td><b>Nome</b></td><td>O nome do currículo</td><td>O nome completo tem de ser o mesmo dos documentos; o nome de citação é outro campo</td></tr>
+          <tr><td><b>Assunto</b></td><td>«Título ou palavra chave da produção»</td><td>Títulos e palavras-chave dos artigos são pesquisáveis: preencha-os como estão no artigo</td></tr>
+          <tr><td><b>Nas bases</b></td><td>«Doutores» ou «Demais pesquisadores»</td><td>A base depende da titulação registrada em «Formação»</td></tr>
+          <tr><td><b>Busca Avançada</b></td><td>Combinações de campos</td><td>É o que os programas e as agências usam para localizar avaliadores e candidatos</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Antes de cadastrar, busque o seu nome aqui: se já existe um currículo seu (feito para um edital, uma iniciação científica, uma seleção), é ele que deve ser atualizado — não um segundo. A regra «um pesquisador, um registro» vale para o Lattes como vale para o ORCID.</p></div>
+        <div class="note"><span class="blabel">O que a busca mostra</span><p>O currículo público — o que foi enviado ao CNPq e publicado. Se você alterou e não enviou, ou enviou há menos de 24 horas, quem busca ainda vê a versão anterior.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s17" data-title="Estrutura do currículo, fluxo de atualização e ORCID no Lattes">
+  <div class="inner">
+    <div class="kicker-part rv">Lattes<span>4 de 6 · Perguntas Frequentes do CNPq e guias públicos · sem capturas do editor</span></div>
+    <h2 class="rv">Estrutura do currículo e o fluxo de atualização descritos pelas FAQ — e o campo do ORCID no Lattes, com o mesmo nome de citação nos dois</h2>
+    <div class="two rv">
+      <div>
+        <p class="lead">Não há prints do editor neste manual: ele só abre com login, e o manual não pede credenciais. O que segue são os nomes usuais dos módulos, como aparecem nas Perguntas Frequentes do CNPq e nos guias públicos das universidades — sem rótulos de tela que não foram vistos.</p>
+        <div class="tw"><table><thead><tr><th style="width:210px">Módulo (nome usual)</th><th>O que entra</th><th style="width:220px">Para o artigo</th></tr></thead><tbody>
+          <tr><td><b>Dados gerais</b></td><td>Nome, nome de citação, endereço eletrônico, identificadores — entre eles o campo do ORCID</td><td>Nome de citação = o da autoria; ORCID preenchido</td></tr>
+          <tr><td><b>Formação</b></td><td>Titulação, orientadores, instituições</td><td>Define a base da busca («Doutores» ou «Demais»)</td></tr>
+          <tr><td><b>Produção bibliográfica</b></td><td>Artigos publicados, com título, ano, periódico, <span class="gterm" tabindex="0" data-t="ISSN" data-d="O identificador do periódico; é por ele que se consulta o Qualis e se evita o homônimo.">ISSN</span> e DOI</td><td>É onde o artigo publicado entra, pelo DOI</td></tr>
+          <tr><td><b>Enviar ao CNPq</b></td><td>Publica a versão editada</td><td>Sem envio, nada muda no currículo público</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="compare">
+          <div><div class="cmp-h">Registros que não batem</div><ul>
+            <li>ORCID com o nome completo; Lattes com abreviação; artigo com uma terceira forma</li>
+            <li>Campo do ORCID vazio no Lattes — ou com o iD de outra pessoa de mesmo nome</li>
+            <li>DOI digitado à mão num lugar e copiado da página no outro</li>
+          </ul></div>
+          <div><div class="cmp-h">Registros coerentes</div><ul>
+            <li>Um nome de citação, escolhido uma vez, nos três lugares</li>
+            <li>O iD no campo do ORCID do Lattes, em «Dados gerais», nas «Outras informações relevantes/Identificadores»</li>
+            <li>O mesmo DOI, colado da página do artigo, nos dois registros</li>
+          </ul></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O vínculo entre os dois registros é o iD no campo do ORCID do Lattes — e a orientação geral dos guias é ter os dois com o mesmo nome de citação. Escolha o nome de citação antes da primeira submissão e não o mude depois: cada variação vira um autor a mais para os índices.</p></div>
+        <div class="note"><span class="blabel">Fonte</span><p>O caminho do campo do ORCID vem de páginas de universidades e de guias públicos consultados em 09/09/2026, não de uma página oficial do CNPq: por isso o manual o descreve sem detalhar rótulos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s18" data-title="Exportar o XML e comparar com o ORCID">
+  <div class="inner">
+    <div class="kicker-part rv">Lattes<span>5 de 6 · execução real de 09/09/2026 · pub.orcid.org · XML ilustrativo · Python 3, só biblioteca padrão</span></div>
+    <h2 class="rv">Exportar o XML do Lattes e comparar com o ORCID: <code>orcid_lattes_diff.py</code> lê a API pública e o XML, casa por DOI e diz o que só está num dos dois</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/sb_t4_orcid_lattes.jpg" width="1920" height="925" alt="Terminal: python3 scripts/orcid_lattes_diff.py --orcid 0000-0002-1825-0097 --lattes curriculo.xml --saida DIFERENCAS.md imprime ORCID: 6 trabalho(s) público(s), Lattes: 3 artigo(s), só no ORCID: 4, só no Lattes: 1, em ambos: 2, e grava DIFERENCAS.md"></div><figcaption><b>Figura 19</b> Execução real de 09/09/2026 (dados ilustrativos; caminho trocado por <code>/home/usuario</code>): com o iD de teste 0000-0002-1825-0097 e um XML ilustrativo do Lattes, o script imprime «ORCID: 6 trabalho(s) público(s)… Lattes: 3 artigo(s)… só no ORCID: 4 · só no Lattes: 1 · em ambos: 2» e grava <code>DIFERENCAS.md</code>. Nada é alterado em nenhum registro.</figcaption></figure>
+    <div class="two rv">
+      <div>
+        <div class="code"><div class="code-head">terminal — uso</div><pre>python3 scripts/orcid_lattes_diff.py --orcid 0000-0002-1825-0097 \
+    --lattes curriculo.xml --saida DIFERENCAS.md
+# --lattes aceita o .xml ou o .zip exportado do editor do Lattes
+# sem --lattes: só lista os trabalhos públicos do ORCID
+# compara por DOI (normalizado); sem DOI, por título</pre></div>
+        <div class="tw"><table><thead><tr><th style="width:160px">Lado</th><th>De onde vem</th></tr></thead><tbody>
+          <tr><td><b>ORCID</b></td><td><code>GET https://pub.orcid.org/v3.0/&lt;iD&gt;/works</code> (Accept: application/json): os trabalhos públicos, agrupados por identificador. Nenhuma chave é necessária para ler o público</td></tr>
+          <tr><td><b>Lattes</b></td><td>O XML exportado do editor (XML/RTF): <code>CURRICULO-VITAE &gt; PRODUCAO-BIBLIOGRAFICA &gt; ARTIGOS-PUBLICADOS &gt; ARTIGO-PUBLICADO</code>, com <code>DADOS-BASICOS-DO-ARTIGO</code> (título, ano, DOI) e <code>DETALHAMENTO-DO-ARTIGO</code> (periódico, <span class="gterm" tabindex="0" data-t="ISSN" data-d="O identificador do periódico; é por ele que se consulta o Qualis e se evita o homônimo.">ISSN</span>); codificação ISO-8859-1</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O script não corrige nada — ele mostra. «Só no ORCID» e «só no Lattes» são listas para você abrir os dois registros e decidir: adicionar o que falta, corrigir o DOI digitado errado, agrupar a versão duplicada. Rode antes de qualquer edital, e de novo depois que o artigo sair (Parte 5).</p></div>
+        <div class="note"><span class="blabel">Exportar</span><p>A exportação (XML ou RTF) é feita de dentro do editor do Lattes, com login — por isso não há tela dela aqui. O XML é a única entrada do script; o RTF serve para leitura humana.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s19" data-title="O que não mostramos e por quê">
+  <div class="inner">
+    <div class="kicker-part rv">Lattes<span>6 de 6 · o limite deste manual, dito com todas as letras</span></div>
+    <h2 class="rv">O que não mostramos e por quê: o editor do Lattes só abre com login, e este manual não pede credenciais de ninguém</h2>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:230px">Não capturado</th><th>Por quê</th><th style="width:260px">O que o manual faz em vez disso</th></tr></thead><tbody>
+          <tr><td><b>O editor do currículo</b> (módulos, botões, telas de produção)</td><td>Só acessível com login gov.br ou CPF/e-mail e senha; nenhuma conta foi usada</td><td>Descreve o fluxo pelas FAQ do CNPq e usa os nomes usuais dos módulos, sem rótulos de tela</td></tr>
+          <tr><td><b>A tela de exportação do XML</b></td><td>Fica dentro do editor</td><td>Documenta a estrutura do XML que o script lê, testada com um XML ilustrativo</td></tr>
+          <tr><td><b>A Sucupira com um resultado de busca</b></td><td>A consulta exige preencher filtros; a página oficial da CAPES sobre o Qualis devolveu 404</td><td>Mostra a tela de filtros e descreve os estratos a partir de páginas de bibliotecas universitárias (Parte 3)</td></tr>
+          <tr><td><b>O DOAJ, o ScholarOne, o ResearchGate, o relatório anual da ORCID</b></td><td>Cloudflare, 404, bloqueio e 403 ao robô em 09/09/2026</td><td>Cita pelo nome e pelo que outras páginas públicas afirmam, com a ressalva</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O manual não pede credenciais — nem as suas, nem as de ninguém. As sete telas logadas do ORCID foram capturadas com autorização do titular, pixeladas, e nada foi alterado no registro; para o Lattes, nem isso: o fluxo é o das FAQ, e onde uma FAQ diz «até 24 horas», o manual diz «até 24 horas» e para aí. Quando a sua tela divergir do que está aqui, vale a sua tela.</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Entregar a senha do Lattes (ou do ORCID) a um assistente, um serviço ou um colega.</strong> O ORCID tem delegados justamente para isso — «Trusted individuals» —, sem senha. O Lattes é atualizado pelo titular; e um serviço que pede a sua senha do gov.br não é um serviço, é um risco.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 3 ===================== -->
+<section class="slide divider" id="s20" data-title="Parte 3 · Escolher o periódico"><div class="inner"><div class="kicker-part rv">Parte 3<span>Escolher o periódico</span></div><h2 class="rv">Think. Check. Submit.; o Qualis na Sucupira; DOAJ e Open policy finder; COPE e Similarity Check; perfis não são identificadores; ler as instruções aos autores</h2><p class="rv">«Finding the right journal to submit to is one of the most important decisions in your publishing journey», diz a página da Elsevier — e é uma decisão dos autores. Seis slides com as ferramentas públicas que a tornam defensável: um checklist de perguntas, uma classificação nacional, dois índices de acesso aberto e política de depósito, um código de conduta editorial, e um exemplo real de instruções aos autores lidas até o fim.</p></div><div class="num">03</div></section>
+
+<section class="slide" id="s21" data-title="Think. Check. Submit.">
+  <div class="inner">
+    <div class="kicker-part rv">Escolher o periódico<span>1 de 6 · thinkchecksubmit.org/journals · captura de 09/09/2026</span></div>
+    <h2 class="rv">Think. Check. Submit.: «Are you submitting your research to a trusted journal?» — o checklist de perguntas que separa o periódico confiável do predatório</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_17_think_check_submit.jpg" width="1920" height="938" alt="Página Journals do Think. Check. Submit. com as seções Think, Check e Submit e o checklist de perguntas para avaliar se um periódico é confiável"></div><figcaption><b>Figura 20</b> A página «Journals» do Think. Check. Submit. (captura de 09/09/2026, sem login): «The checklist is a tool that will help you discover what you need to know when assessing whether or not a publisher is suitable for your research». THINK: «More research is being published worldwide. New publishers are launched each week»; CHECK: a lista de perguntas; SUBMIT: «Complete the checklist and submit your manuscript only if you can answer 'yes' to most or all of the questions above.» A iniciativa existe desde 2015, segundo a página do DOAJ.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:190px">CHECK — o bloco</th><th>As perguntas, como a página as faz</th></tr></thead><tbody>
+          <tr><td><b>O periódico</b></td><td>Você conhece o periódico e já leu artigos dele? O nome é único (não imita outro)? O ISSN consta no portal ISSN?</td></tr>
+          <tr><td><b>A editora</b></td><td>Tem nome e contato — telefone, e-mail, endereço? É membro do COPE? Está no DOAJ (se acesso aberto)? Na OASPA? No SciELO, no Latindex, na Redalyc?</td></tr>
+          <tr><td><b>A revisão</b></td><td>A política de revisão por pares está clara: revisores independentes, quantos, sem prometer aceite nem prazo curtíssimo?</td></tr>
+          <tr><td><b>Indexação e preservação</b></td><td>Onde é indexado; arquivamento de longo prazo; identificadores persistentes (DOI)</td></tr>
+          <tr><td><b>Taxas e direitos</b></td><td>As taxas são explicadas — para quê, quando, moeda, isenções? A licença é clara? Você retém direitos e pode depositar em repositório? Há política de conflito de interesses?</td></tr>
+          <tr><td><b>Formato e métricas</b></td><td>HTML, XML, PDF; quais métricas são exibidas e de onde vêm</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Responda por escrito, com a evidência ao lado de cada «sim» — a página do ISSN, a lista do COPE, o registro no DOAJ. O <code>checklist_submissao.py</code> (Parte 4) já traz essas nove perguntas no momento «Escolher», com a coluna «Evidência (arquivo ou tela)». Um «não sei» conta como «não».</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s22" data-title="Qualis 2017-2020 na Sucupira">
+  <div class="inner">
+    <div class="kicker-part rv">Escolher o periódico<span>2 de 6 · sucupira.capes.gov.br «Qualis Periódicos» · captura de 09/09/2026</span></div>
+    <h2 class="rv">O Qualis 2017-2020 na Sucupira: nove estratos, uma classificação única por periódico dada pela área-mãe — consultada por ISSN, não por título</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_19_sucupira_qualis.jpg" width="1920" height="938" alt="Tela Qualis Periódicos da Plataforma Sucupira da CAPES, com os filtros Evento de Classificação, Área de Avaliação, ISSN, Título e Classificação, sem resultado de busca"></div><figcaption><b>Figura 21</b> «Qualis Periódicos» na Plataforma Sucupira (captura de 09/09/2026, sem login): os filtros «Evento de Classificação», «Área de Avaliação», «ISSN», «Título» e «Classificação». Nenhuma consulta foi executada na captura; a consulta é feita pelo ISSN ou pelo título, escolhendo o evento do quadriênio 2017-2020.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Estratos 2017-2020</th><th>O que vale saber</th></tr></thead><tbody>
+          <tr><td><b>A1 · A2 · A3 · A4</b></td><td>Os estratos superiores</td></tr>
+          <tr><td><b>B1 · B2 · B3 · B4</b></td><td>Os intermediários</td></tr>
+          <tr><td><b>C</b></td><td>Peso zero na avaliação</td></tr>
+          <tr><td><b>Classificação única</b></td><td>Cada periódico recebe <em>uma</em> classificação, dada pela «<span class="gterm" tabindex="0" data-t="Área-mãe" data-d="A área de avaliação em que o periódico é mais usado; é ela que dá a classificação única do Qualis 2017-2020.">área-mãe</span>» — a área de avaliação em que ele é mais usado —, e não uma por área, como nos quadriênios anteriores</td></tr>
+          <tr><td><b>Consulta</b></td><td>Por ISSN ou título, na Sucupira. O ISSN evita o homônimo e a grafia diferente do título</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O Qualis é o que o programa de pós usa para contar a produção — por isso importa a quem vai defender ou pedir bolsa. Ele não é condição para publicar: um periódico sem estrato não é «proibido», e um A1 não dispensa o Think. Check. Submit. Confira o estrato pelo ISSN, anote o evento consultado (2017-2020) e a data, e registre no checklist.</p></div>
+        <div class="note"><span class="blabel">Fonte</span><p>Os estratos e a regra da <span class="gterm" tabindex="0" data-t="Área-mãe" data-d="A área de avaliação em que o periódico é mais usado; é ela que dá a classificação única do Qualis 2017-2020.">área-mãe</span> vêm de páginas de bibliotecas universitárias consultadas em 09/09/2026; a página oficial da CAPES sobre o Qualis devolveu 404 ao robô. A classificação do próximo quadriênio pode mudar as regras — o que vale é o evento que a Sucupira mostra no dia da consulta.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s23" data-title="DOAJ e Open policy finder">
+  <div class="inner">
+    <div class="kicker-part rv">Escolher o periódico<span>3 de 6 · doaj.org/about · openpolicyfinder.jisc.ac.uk · captura de 09/09/2026</span></div>
+    <h2 class="rv">DOAJ e Open policy finder: se o periódico é de acesso aberto, ele está no índice? Qual licença o artigo terá — e que versão você pode depositar num repositório?</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_22_sherpa.jpg" width="1920" height="938" alt="Página inicial do Open policy finder da Jisc, com o lema Inspiring confident choices in open access publishing for authors and institutions, a busca por periódico, editora ou financiador e o aviso de cookies aberto"></div><figcaption><b>Figura 22</b> O Open policy finder da Jisc, antigo Sherpa Romeo (captura de 09/09/2026, sem login): «Inspiring confident choices in open access publishing for authors and institutions»; busca por periódico, editora ou financiador; «Open access compliance — Understand whether a journal complies with a funder's open access policies»; «Transitional agreements». A página trazia uma notícia de 13/08/2026 sobre melhorias no site. O aviso de cookies foi deixado como estava.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Ferramenta</th><th>O que é</th><th style="width:230px">O que responde</th></tr></thead><tbody>
+          <tr><td><b>DOAJ</b></td><td>«A unique and extensive index of diverse open access journals from around the world, driven by a growing community». Fundado em 2003 na Universidade de Lund; gerido desde setembro de 2024 pela DOAJ Foundation (Roskilde, Dinamarca)</td><td>Se o periódico de acesso aberto passou pelos critérios do índice — uma das perguntas do Think. Check. Submit.</td></tr>
+          <tr><td><b>Open policy finder</b></td><td>A base da Jisc com as políticas de acesso aberto de periódicos, editoras e financiadores</td><td>Qual licença o artigo terá; qual versão (submetida, aceita ou publicada) pode ser depositada em repositório, e com que embargo</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Antes de submeter, saiba a licença e o que poderá depositar depois: é a política do periódico que decide se a versão aceita vai para o repositório institucional ou fica só atrás do paywall. Isso entra na carta e no checklist — e é o que o manual de Ciência aberta chama de «depósito da versão permitida» (Parte 5).</p></div>
+        <div class="note"><span class="blabel">Sem captura do DOAJ</span><p>O site de busca do DOAJ ficou atrás da verificação da Cloudflare em 09/09/2026; o manual cita a página «About» e não afirma o número de periódicos indexados, porque as fontes divergem.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s24" data-title="COPE e Similarity Check">
+  <div class="inner">
+    <div class="kicker-part rv">Escolher o periódico<span>4 de 6 · publicationethics.org · crossref.org/services/similarity-check · capturas de 09/09/2026</span></div>
+    <h2 class="rv">COPE e Similarity Check: a conduta editorial que o periódico assume — e o relatório de similaridade que o editor lê, porque similaridade não é plágio</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_20_cope_peer_review.jpg" width="1920" height="938" alt="Página inicial do COPE, Committee on Publication Ethics, com o lema Promoting integrity in scholarly research and its publication, a notícia sobre o novo Code of Conduct for Members e o aviso de cookies aberto"></div><figcaption><b>Figura 23</b> O COPE (captura de 09/09/2026, sem login): «Promoting integrity in scholarly research and its publication». Fundado em 1997 por editores de periódicos médicos do Reino Unido, com cerca de 13 mil membros entre periódicos e editoras; os «Core Practices» (10, desde 2017) foram substituídos por um «Code of Conduct for Members» publicado em julho de 2026, com transição de 12 meses. O aviso de cookies foi deixado como estava.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_21_crossref_similarity.jpg" width="1920" height="938" alt="Página do Similarity Check no site do Crossref, descrevendo o serviço powered by iThenticate, o banco de mais de 78 milhões de itens de texto completo e o relatório com Similarity Score"></div><figcaption><b>Figura 24</b> O Similarity Check (captura de 09/09/2026, sem login): «A service provided by Crossref and powered by iThenticate—Similarity Check provides editors with a user-friendly tool to help detect plagiarism»; banco de «over 78 million full-text scholarly content items»; o relatório traz «a Similarity Score and a highlighted set of matches to similar text» para o editor avaliar.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p><strong>Similaridade não é plágio.</strong> O relatório marca trechos parecidos — a seção de métodos que repete o protocolo, as referências, as citações com aspas — e dá um número; quem julga é o editor. O que evita problema é o de sempre: citar com aspas o que é literal, parafrasear de verdade, e não reaproveitar o próprio texto publicado sem dizer de onde veio.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">Para que serve o COPE aqui</span><p>Um periódico membro do COPE assumiu regras de conduta sobre autoria, conflito de interesses e má conduta — e é a essas regras que o editor recorre numa disputa. A pergunta «a editora é membro do COPE?» está no Think. Check. Submit. por isso. A revista do exemplo desta parte (slide 6) declara adotar o <span class="gterm" tabindex="0" data-t="Similarity Check" data-d="Serviço do Crossref, movido pelo iThenticate, que dá ao editor um relatório de similaridade; similaridade não é plágio — quem julga é o editor.">Similarity Check</span>.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s25" data-title="Perfis não são identificadores">
+  <div class="inner">
+    <div class="kicker-part rv">Escolher o periódico<span>5 de 6 · scholar.google.com (Perfis, pt-BR) · captura de 09/09/2026</span></div>
+    <h2 class="rv">Perfis não são identificadores: o Google Acadêmico mostra as suas citações; o ORCID é o que o sistema de submissão reconhece como você</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_26_scholar_profile.jpg" width="1920" height="938" alt="Página de apresentação dos Perfis do Google Acadêmico em português do Brasil, com o texto sobre a forma simples de os autores exibirem as próprias publicações e as métricas de citação"></div><figcaption><b>Figura 25</b> A página dos Perfis do Google Acadêmico, em pt-BR (captura de 09/09/2026, sem login): «Google Scholar Profiles provide a simple way for authors to showcase their academic publications». O perfil é do autor, com as métricas de citação calculadas pelo Google; não é um identificador persistente e nenhum sistema de submissão o usa para reconhecer a autoria.</figcaption></figure>
+      <div>
+        <div class="compare">
+          <div><div class="cmp-h">Perfil (Google Acadêmico, ResearchGate…)</div><ul>
+            <li>Vitrine: lista de publicações e métricas, mantida pela plataforma</li>
+            <li>Depende de a plataforma existir e de o algoritmo acertar o autor</li>
+            <li>Não entra na submissão, no Lattes nem no edital</li>
+          </ul></div>
+          <div><div class="cmp-h">Identificador (ORCID iD)</div><ul>
+            <li>Um número persistente, seu, com registro que você controla</li>
+            <li>O sistema de submissão pede; o Lattes tem um campo para ele; o DOI do artigo aponta para ele</li>
+            <li>A API pública devolve os trabalhos — é o que o <code>orcid_lattes_diff.py</code> lê</li>
+          </ul></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Tenha o perfil se quiser — ele ajuda a acompanhar quem cita você —, mas nunca no lugar do ORCID e do Lattes. O que o periódico, a agência e o programa pedem é o iD; e o que este manual confere é a coerência entre o ORCID, o Lattes e o artigo, não o número de citações de nenhum perfil.</p></div>
+        <div class="note"><span class="blabel">ResearchGate</span><p>A página bloqueou o robô em 09/09/2026; o manual não a captura nem afirma nada sobre ela além do gênero: perfil, não identificador.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s26" data-title="Ler as instruções aos autores: um exemplo real">
+  <div class="inner">
+    <div class="kicker-part rv">Escolher o periódico<span>6 de 6 · SciELO, revista Production (ABEPRO), «Instructions to authors» · captura de 09/09/2026</span></div>
+    <h2 class="rv">Ler as instruções aos autores até o fim — um exemplo real: 4.000 a 8.000 palavras, inglês, carta obrigatória, duplo-cega, CRediT, sem taxas, CC-BY, ScholarOne</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_12_scielo_submissao.jpg" width="1920" height="938" alt="Página Instructions to authors da revista Production no SciELO, com as regras de extensão, idioma, carta de apresentação, tipos de artigo aceitos, estrutura, revisão duplo-cega, Similarity Check, CRediT, conflito de interesses, dados abertos, licença CC-BY e ausência de taxas"></div><figcaption><b>Figura 26</b> «Instructions to authors» da revista <em>Production</em> (ABEPRO, ISSN 0103-6513 / 1980-5411) no SciELO (captura de 09/09/2026, sem login). É um <em>exemplo de leitura</em>, não uma regra geral: cada periódico tem a sua página, e é ela que manda.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Item</th><th>O que a página diz</th></tr></thead><tbody>
+          <tr><td><b>Extensão e idioma</b></td><td>«Manuscripts shall have from 4,000 to 8,000 words, including references»; submissões em inglês</td></tr>
+          <tr><td><b>Carta</b></td><td>«All submissions must be accompanied by a cover letter», destacando aderência ao escopo, relevância, objetivos, métodos, resultados e a contribuição original</td></tr>
+          <tr><td><b>Tipos e estrutura</b></td><td>Artigos originais e revisões sistemáticas (não aceita relatos de caso, comunicações breves, cartas, revisões simples, relatórios técnicos); «Abstract, Keywords, Introduction, Methods, Results, Discussions, Conclusions, and References»</td></tr>
+          <tr><td><b>Revisão e integridade</b></td><td>«double-blind peer review process in which two or more reviewers are assigned»; «adopts Crossref Similarity Check»</td></tr>
+          <tr><td><b>Autoria e declarações</b></td><td>Recomenda a taxonomia CRediT; critérios mínimos: participar da discussão dos resultados e revisar e aprovar a versão final; «Conflict of Interest Statement» assinado; «encourages the practice of open data»; preprints não devem ser alterados para parecer a versão final</td></tr>
+          <tr><td><b>Licença, taxas, sistema</b></td><td>CC-BY; «does not charge fees for the submission, review, publication, distribution, or downloading of articles»; submissão pelo ScholarOne</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Leia a página inteira antes de formatar uma linha — e copie cada exigência para o checklist com a data. Extensão, idioma, tipo de artigo e carta são motivos de <em><span class="gterm" tabindex="0" data-t="Desk reject" data-d="Rejeição pelo editor sem enviar a revisores: escopo, formato, extensão, carta, similaridade.">desk reject</span></em> que não passam pelo revisor. O que este exemplo mostra é o gênero de coisa que toda página de instruções tem; os valores são deste periódico, nesta data.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 4 ===================== -->
+<section class="slide divider" id="s27" data-title="Parte 4 · Preparar e submeter"><div class="inner"><div class="kicker-part rv">Parte 4<span>Preparar e submeter</span></div><h2 class="rv">Os sistemas de submissão; o checklist em quatro momentos; a carta de apresentação e as sete declarações; autoria e CRediT; versão anonimizada e metadados; o que acontece depois de clicar em enviar</h2><p class="rv">Dois scripts rodados de verdade em 09/09/2026 — um gera o checklist de 31 itens com a coluna da evidência, o outro a carta com as sete declarações — e as regras que valem em qualquer sistema: quem assina responde, o que se declara se prova, e os metadados digitados no sistema têm de ser os mesmos do manuscrito.</p></div><div class="num">04</div></section>
+
+<section class="slide" id="s28" data-title="Os sistemas: OJS, Editorial Manager e ScholarOne">
+  <div class="inner">
+    <div class="kicker-part rv">Preparar e submeter<span>1 de 7 · pkp.sfu.ca/software/ojs · ariessys.com (pt) · capturas de 09/09/2026</span></div>
+    <h2 class="rv">Os sistemas de submissão: OJS, Editorial Manager e ScholarOne — nomes diferentes, o mesmo fluxo de metadados, arquivos, declarações e status</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_13_pkp_ojs.jpg" width="1920" height="938" alt="Página do Open Journal Systems no site do Public Knowledge Project, com a descrição da plataforma de publicação de periódicos de código aberto mais usada do mundo e os links para download, documentação e guias"></div><figcaption><b>Figura 27</b> O OJS no site do PKP (captura de 09/09/2026, sem login): «Open Journal Systems» — «Manage your entire researcher-to-reader workflow from submission to publication, peer review, and production from one place with OJS, the world's most widely used open-source journal publishing platform»; «Everything a scholarly journal needs». Software livre do Public Knowledge Project (Simon Fraser University).</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/sb_14_editorial_manager.jpg" width="1920" height="938" alt="Página do Editorial Manager da Aries Systems em português, com o título Gerente Editorial, a descrição do sistema de submissão e revisão por pares e o aviso de cookies aberto"></div><figcaption><b>Figura 28</b> O Editorial Manager (Aries Systems), na versão em português (captura de 09/09/2026, sem login): «Gerente Editorial — O principal sistema de submissão e revisão por pares de manuscritos para periódicos acadêmicos, obras de referência, livros e outras publicações»; «Publique com confiança». O aviso de cookies foi deixado como estava.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Sistema</th><th>Quem faz</th><th>Onde você encontra</th></tr></thead><tbody>
+          <tr><td><b>OJS</b></td><td>PKP (livre)</td><td>A maioria dos periódicos brasileiros e do SciELO que hospedam o próprio sistema</td></tr>
+          <tr><td><b>Editorial Manager</b></td><td>Aries Systems</td><td>Editoras comerciais e sociedades científicas</td></tr>
+          <tr><td><b>ScholarOne</b></td><td>Clarivate</td><td>Usado, por exemplo, pela revista <em>Production</em> (Parte 3); a página institucional devolveu «Page Not Found» em 09/09/2026, por isso é citado só pelo nome</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O sistema muda; o que ele pede não: uma conta (vincule o ORCID iD nela), os metadados do artigo, os arquivos (manuscrito, versão anonimizada, figuras, material suplementar), a carta, as declarações e os coautores com e-mail e afiliação. Prepare tudo fora do sistema, no checklist, e o formulário vira cópia e cola.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s29" data-title="As etapas que a editora descreve">
+  <div class="inner">
+    <div class="kicker-part rv">Preparar e submeter<span>2 de 7 · elsevier.com «Submit your paper» · captura de 09/09/2026</span></div>
+    <h2 class="rv">As etapas que uma editora descreve: preparar a pesquisa, escolher o periódico, preparar o manuscrito, submeter, revisão por pares, provas e publicação</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/sb_16_elsevier_submit.jpg" width="1920" height="938" alt="Página Submit your paper da Elsevier, com o texto Publish in a journal to share your discoveries and build connections e as etapas do processo de publicação, com o aviso de cookies aberto"></div><figcaption><b>Figura 29</b> «Submit your paper», da Elsevier (captura de 09/09/2026, sem login): «Publish in a journal to share your discoveries and build connections». A página descreve as etapas do processo, reproduzidas ao lado. O aviso de cookies foi deixado como estava. É a descrição de uma editora; a sequência é a mesma em qualquer outra.</figcaption></figure>
+      <div>
+        <div class="flow">
+          <div class="node"><span class="nn">1</span><span class="nt">Preparar a pesquisa</span><span class="nd">O manuscrito pronto — os manuais irmãos</span></div>
+          <div class="node"><span class="nn">2</span><span class="nt">Escolher o periódico</span><span class="nd">«Finding the right journal to submit to is one of the most important decisions in your publishing journey» — a Parte 3</span></div>
+          <div class="node"><span class="nn">3</span><span class="nt">Preparar o manuscrito</span><span class="nd">«A well-structured, robust article that adheres to ethical standards» — checklist, carta, declarações</span></div>
+          <div class="node"><span class="nn">4</span><span class="nt">Submeter</span><span class="nd">O sistema do periódico; número do manuscrito</span></div>
+          <div class="node"><span class="nn">5</span><span class="nt">Revisão por pares</span><span class="nd">«Independent reviewers — academics or professionals with expertise in your field — provide an unbiased assessment» — a Parte 5</span></div>
+          <div class="node gate"><span class="nn">6</span><span class="nt">Provas e publicação</span><span class="nd">«Once your manuscript has been accepted, you'll receive proofs of your paper»; «Returning your edits promptly prevents delays»</span></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>A etapa 6 tem um prazo curto e costuma chegar por e-mail: as provas voltam com correções de composição, não com texto novo. E o processo não termina aí — falta registrar o artigo no ORCID e no Lattes, que é a etapa que a página da editora não lista e a Parte 5 acrescenta.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s30" data-title="checklist_submissao.py: os quatro momentos">
+  <div class="inner">
+    <div class="kicker-part rv">Preparar e submeter<span>3 de 7 · execução real de 09/09/2026 · Python 3, só biblioteca padrão · dados ilustrativos</span></div>
+    <h2 class="rv"><code>checklist_submissao.py</code>: 31 itens em quatro momentos — Escolher, Preparar, Submeter, Depois — cada um com a coluna «Evidência (arquivo ou tela)»</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/sb_t1_checklist.jpg" width="1920" height="583" alt="Terminal: python3 scripts/checklist_submissao.py --periodico Production --saida CHECKLIST_SUBMISSAO.md responde gravado: CHECKLIST_SUBMISSAO.md (31 itens em 4 momentos; periódico: Production), e o início do arquivo mostra a tabela com as colunas Item, Evidência (arquivo ou tela) e Feito"></div><figcaption><b>Figura 30</b> Execução real de 09/09/2026 (dados ilustrativos; caminho trocado por <code>/home/usuario</code>): <code>checklist_submissao.py --periodico "Production" --saida CHECKLIST_SUBMISSAO.md</code> responde «gravado: CHECKLIST_SUBMISSAO.md (31 itens em 4 momentos; periódico: Production)». O arquivo traz os itens com as colunas «Evidência (arquivo ou tela)» e «Feito [ ]». O nome do periódico é o do exemplo da Parte 3; o checklist não sabe nada sobre ele além do nome.</figcaption></figure>
+    <div class="two rv">
+      <div>
+        <div class="code"><div class="code-head">terminal — uso</div><pre>python3 scripts/checklist_submissao.py --periodico "Production" \
+    [--issn 0103-6513] [--qualis A2] [--sistema ScholarOne] [--taxa "não cobra"] \
+    --saida CHECKLIST_SUBMISSAO.md
+# --issn, --qualis, --sistema e --taxa só preenchem o cabeçalho: o que você conferiu, com a data
+# os 31 itens são os mesmos para qualquer periódico; a coluna «Evidência» é o que muda</pre></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:110px">Momento</th><th class="num" style="width:60px">Itens</th><th>O que cobre</th></tr></thead><tbody>
+          <tr><td><b>Escolher</b></td><td class="num">9</td><td>As perguntas do Think. Check. Submit. e o Qualis pelo ISSN</td></tr>
+          <tr><td><b>Preparar</b></td><td class="num">12</td><td>Os arquivos: manuscrito no formato pedido, versão anonimizada, figuras, material suplementar, carta, declarações, CRediT, dados e código, referências verificadas, ORCID de cada autor</td></tr>
+          <tr><td><b>Submeter</b></td><td class="num">5</td><td>Metadados iguais ao manuscrito, coautores com e-mail e afiliação, iD vinculado, arquivos enviados, número do manuscrito guardado</td></tr>
+          <tr><td><b>Depois</b></td><td class="num">5</td><td>Status acompanhado, resposta aos revisores, provas, registro no ORCID e no Lattes, depósito da versão permitida</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Um item só é «Feito» com a evidência ao lado — o arquivo, a tela, a página. O checklist é dos autores, não do assistente: ele não marca nada sozinho, e o <code>--qualis A2</code> do exemplo é ilustrativo, não a classificação de periódico nenhum.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s31" data-title="carta_apresentacao.py: a carta e as sete declarações">
+  <div class="inner">
+    <div class="kicker-part rv">Preparar e submeter<span>4 de 7 · execução real de 09/09/2026 · Python 3, só biblioteca padrão · dados ilustrativos</span></div>
+    <h2 class="rv"><code>carta_apresentacao.py</code>: aderência ao escopo, método, resultado e contribuição — e as sete declarações que toda carta precisa ter, com «[PREENCHER]» onde faltar</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/sb_t2_carta.jpg" width="1920" height="793" alt="Terminal: python3 scripts/carta_apresentacao.py com os argumentos titulo, periodico, contribuicao, metodo, resultado e as declarações responde gravado: CARTA_APRESENTACAO.md (pt; 7 declarações; 0 campo(s) marcado(s) para preencher), e o arquivo mostra a carta com os parágrafos e a lista de declarações"></div><figcaption><b>Figura 31</b> Execução real de 09/09/2026 (dados ilustrativos; caminho trocado por <code>/home/usuario</code>): o script recebe título, periódico, contribuição, método e resultado, mais as declarações, e responde «gravado: CARTA_APRESENTACAO.md (pt; 7 declarações; 0 campo(s) marcado(s) para preencher)». O título e os autores da carta são fictícios.</figcaption></figure>
+    <div class="two rv">
+      <div>
+        <div class="code"><div class="code-head">terminal — uso</div><pre>python3 scripts/carta_apresentacao.py --titulo "…" --periodico "…" \
+    --contribuicao "…" --metodo "…" --resultado "…" \
+    [--autores "…"] [--correspondente "…"] [--lingua pt|en] \
+    [--coi "…"] [--financiamento "…"] [--etica "…"] [--dados "…"] [--ia "…"] \
+    --saida CARTA_APRESENTACAO.md
+# o que faltar fica «[PREENCHER]» e é contado na saída</pre></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:60px">#</th><th style="width:220px">Declaração</th><th>O que afirma</th></tr></thead><tbody>
+          <tr><td class="num">1</td><td><b>Originalidade e exclusividade</b></td><td>Inédito; não está submetido a outro periódico</td></tr>
+          <tr><td class="num">2</td><td><b>Aprovação dos autores + CRediT</b></td><td>Todos leram e aprovaram; o papel de cada um</td></tr>
+          <tr><td class="num">3</td><td><b>Conflito de interesses</b></td><td>Há ou não há — e qual</td></tr>
+          <tr><td class="num">4</td><td><b>Financiamento</b></td><td>Agência e número do processo, ou «nenhum»</td></tr>
+          <tr><td class="num">5</td><td><b>Ética</b></td><td>Comitê e parecer, quando há pessoas ou animais</td></tr>
+          <tr><td class="num">6</td><td><b>Dados e código</b></td><td>Onde estão, ou por que não podem ser abertos</td></tr>
+          <tr><td class="num">7</td><td><b>Uso de IA</b></td><td>Ferramenta e finalidade, ou «não foi usada»</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>A carta é lida pelo editor antes do manuscrito: ela diz por que o artigo cabe <em>naquele</em> periódico. Carta genérica é o erro que mais cedo aparece; uma declaração falsa é o que mais tarde custa. O script escreve o que os autores lhe dizem — e marca o que eles ainda não decidiram.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s32" data-title="Autoria e CRediT; conflito, ética, dados e IA">
+  <div class="inner">
+    <div class="kicker-part rv">Preparar e submeter<span>5 de 7 · credit.niso.org (ANSI/NISO Z39.104-2022) · instruções da revista Production · CNPq</span></div>
+    <h2 class="rv">Autoria e CRediT: 14 papéis para dizer quem fez o quê — e o que as declarações de conflito de interesses, ética, dados e uso de IA afirmam</h2>
+    <div class="two rv">
+      <div>
+        <p class="lead">O CRediT é «a community-owned taxonomy of 14 contributor roles», padrão ANSI/NISO Z39.104-2022. Ele não substitui os critérios de autoria do periódico — a revista do exemplo exige, no mínimo, participar da discussão dos resultados e revisar e aprovar a versão final — mas registra a contribuição de cada nome, e é isso que o sistema de submissão pergunta, autor por autor.</p>
+        <div class="tw"><table><thead><tr><th>Papel</th><th>Papel</th></tr></thead><tbody>
+          <tr><td>Conceptualization</td><td>Resources</td></tr>
+          <tr><td>Data curation</td><td>Software</td></tr>
+          <tr><td>Formal analysis</td><td>Supervision</td></tr>
+          <tr><td>Funding acquisition</td><td>Validation</td></tr>
+          <tr><td>Investigation</td><td>Visualization</td></tr>
+          <tr><td>Methodology</td><td>Writing – original draft</td></tr>
+          <tr><td>Project administration</td><td>Writing – review &amp; editing</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Declaração</th><th>O que dizer</th><th style="width:200px">O que não fazer</th></tr></thead><tbody>
+          <tr><td><b>Conflito de interesses</b></td><td>Vínculo financeiro, pessoal ou institucional que possa influenciar o trabalho — ou «nenhum». Alguns periódicos exigem o formulário assinado por cada autor</td><td>Omitir um financiador porque «não influenciou»</td></tr>
+          <tr><td><b>Ética</b></td><td>Comitê, número do parecer e consentimento, quando há pessoas ou animais; a decisão de que não se aplica também é uma declaração</td><td>Pedir o parecer depois de coletar</td></tr>
+          <tr><td><b>Dados e código</b></td><td>Repositório e identificador, ou a razão de não abrir (dados sensíveis, sigilo); o periódico do exemplo «encourages the practice of open data»</td><td>«Disponíveis mediante solicitação» sem meio de solicitar</td></tr>
+          <tr><td><b>Uso de IA</b></td><td>Ferramenta e finalidade, como pede o CNPq e o manual de Uso de IA; IA não é autor</td><td>Listar uma ferramenta como coautora; omitir o uso</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Quem assina responde pelo conteúdo inteiro, não só pela parte que fez. Autoria honorária (o chefe que não leu) e autoria fantasma (quem escreveu e não assina) são os dois casos que o COPE trata como má conduta — e que uma tabela CRediT preenchida com honestidade torna visíveis antes de virar problema.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s33" data-title="Versão anonimizada e metadados iguais ao manuscrito">
+  <div class="inner">
+    <div class="kicker-part rv">Preparar e submeter<span>6 de 7 · revisão duplo-cega · o formulário do sistema</span></div>
+    <h2 class="rv">Versão anonimizada e metadados iguais ao manuscrito: o revisor não pode saber quem escreveu, e o sistema não pode dizer outra coisa que o PDF</h2>
+    <div class="two rv">
+      <div>
+        <div class="compare">
+          <div><div class="cmp-h">Anonimização que falha</div><ul>
+            <li>Nome retirado da primeira página, mas presente nas propriedades do arquivo, no cabeçalho, nos agradecimentos</li>
+            <li>«Como mostramos em [autocitação, 2024]» — o revisor sabe quem é</li>
+            <li>Nome da instituição na descrição do local do estudo, no comitê de ética, no número do processo</li>
+          </ul></div>
+          <div><div class="cmp-h">Anonimização que funciona</div><ul>
+            <li>Um arquivo «anonimizado» separado, com metadados do PDF limpos e sem página de rosto</li>
+            <li>Autocitações na terceira pessoa («como mostrado por [Autor], 2024») ou marcadas «[referência omitida para revisão]»</li>
+            <li>Instituição, comitê e financiamento só na versão completa e na carta</li>
+          </ul></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Na <span class="gterm" tabindex="0" data-t="Revisão duplo-cega" data-d="Revisão por pares em que autores e revisores são anônimos entre si; exige a versão anonimizada.">revisão duplo-cega</span> — o caso da revista do exemplo, com «two or more reviewers» — o manuscrito vai sem identificação, e a identificação vai na carta e nos metadados do sistema, que só o editor vê. Dois arquivos, portanto: o completo e o anonimizado. O checklist tem um item para cada um.</p></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:200px">Campo do sistema</th><th>Tem de ser igual a</th></tr></thead><tbody>
+          <tr><td><b>Título</b></td><td>O título do manuscrito, letra por letra</td></tr>
+          <tr><td><b>Resumo e palavras-chave</b></td><td>Os do manuscrito — é o que os índices vão mostrar</td></tr>
+          <tr><td><b>Autores, ordem, afiliação</b></td><td>A página de rosto da versão completa; a afiliação do «Employment» do ORCID</td></tr>
+          <tr><td><b>ORCID iD de cada autor</b></td><td>O iD vinculado à conta de cada um — o sistema costuma pedir que o próprio autor autorize</td></tr>
+          <tr><td><b>Autor correspondente</b></td><td>O e-mail que alguém lê todo dia, durante meses</td></tr>
+          <tr><td><b>Financiamento e conflito</b></td><td>A carta e as declarações</td></tr>
+        </tbody></table></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>iD não vinculado no sistema de submissão.</strong> Digitar o número do ORCID num campo de texto não é vincular: o vínculo é a autorização que o próprio autor dá ao sistema (e que aparece depois em «Trusted parties»). Sem ele, o artigo publicado não chega ao registro pelo Crossref, e você o adiciona à mão — se lembrar.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s34" data-title="Depois de clicar em enviar">
+  <div class="inner">
+    <div class="kicker-part rv">Preparar e submeter<span>7 de 7 · o status no sistema · SUBMISSAO.md</span></div>
+    <h2 class="rv">O que acontece depois de clicar em enviar: o número do manuscrito, o status que muda sem aviso, e o registro que os autores mantêm — <code>SUBMISSAO.md</code></h2>
+    <div class="two rv">
+      <div>
+        <div class="flow">
+          <div class="node"><span class="nn">1</span><span class="nt">Confirmação</span><span class="nd">E-mail com o número do manuscrito; guarde-o — é como o periódico vai se referir ao seu artigo daqui em diante</span></div>
+          <div class="node"><span class="nn">2</span><span class="nt">Triagem editorial</span><span class="nd">O editor confere escopo, formato, carta, similaridade; pode devolver para ajuste ou rejeitar sem revisores (<em><span class="gterm" tabindex="0" data-t="Desk reject" data-d="Rejeição pelo editor sem enviar a revisores: escopo, formato, extensão, carta, similaridade.">desk reject</span></em>)</span></div>
+          <div class="node"><span class="nn">3</span><span class="nt">Com revisores</span><span class="nd">O status muda quando os revisores aceitam o convite e quando devolvem o parecer; o sistema não avisa cada mudança</span></div>
+          <div class="node gate"><span class="nn">4</span><span class="nt">Decisão</span><span class="nd">Aceite, revisão menor, revisão maior ou rejeição — a Parte 5</span></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Um periódico de cada vez. Enquanto o status não for «rejeitado» ou «retirado», o manuscrito está submetido — e submetê-lo a outro viola a declaração 1 da carta. Se o prazo passou muito do que o periódico anuncia, escreva ao editor pelo sistema, com o número do manuscrito; não submeta em paralelo.</p></div>
+      </div>
+      <div>
+        <div class="code"><div class="code-head">SUBMISSAO.md — o registro dos autores (exemplo ilustrativo)</div><pre># Submissão — [título curto]
+periódico: Production (ISSN 0103-6513) · sistema: ScholarOne
+número do manuscrito: [como veio no e-mail de confirmação]
+autor correspondente: [nome] · ORCID vinculado de todos: sim
+
+| data       | evento                          | evidência                    |
+|------------|---------------------------------|------------------------------|
+| 2026-09-09 | submetido                       | e-mail de confirmação (PDF)  |
+| 2026-09-09 | checklist e carta anexados      | CHECKLIST_SUBMISSAO.md, CARTA_APRESENTACAO.md |
+|            | status: com revisores           | captura do sistema           |
+|            | decisão:                        | e-mail do editor             |</pre></div>
+        <div class="note"><span class="blabel">Por que um arquivo</span><p>O sistema guarda o status, não a sua história: qual versão foi enviada, o que a carta dizia, quando o editor foi contatado. O <code>SUBMISSAO.md</code> fica na pasta do projeto, versionado como o resto (manual de Git), e é o que a Parte 5 vai continuar — decisão, resposta, aceite, DOI, registro.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 5 ===================== -->
+<section class="slide divider" id="s35" data-title="Parte 5 · Revisão, decisão e publicação"><div class="inner"><div class="kicker-part rv">Parte 5<span>Revisão, decisão e publicação</span></div><h2 class="rv">Tipos de revisão e decisões; responder ponto a ponto; rejeição e aceite; publicado: registrar no ORCID e no Lattes e depositar; manter os dois registros coerentes</h2><p class="rv">O vocabulário da revisão por pares, sem números — este manual não afirma tempo de revisão nem taxa de aceite de periódico nenhum. Um script que transforma a decisão do editor numa tabela de respostas, as regras para discordar com argumento, e o fecho que quase todo tutorial esquece: o artigo publicado tem de voltar ao ORCID e ao Lattes com o mesmo DOI.</p></div><div class="num">05</div></section>
+
+<section class="slide alt" id="s36" data-title="Tipos de revisão e decisões">
+  <div class="inner">
+    <div class="kicker-part rv">Revisão, decisão e publicação<span>1 de 5 · vocabulário corrente · instruções da revista Production · sem números</span></div>
+    <h2 class="rv">Tipos de revisão e decisões: quem sabe o nome de quem, e o que cada palavra da carta do editor significa</h2>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Tipo de revisão</th><th>Quem sabe o quê</th><th style="width:230px">O que muda para os autores</th></tr></thead><tbody>
+          <tr><td><b>Simples-cega</b></td><td>O revisor é anônimo; o autor é conhecido</td><td>Não há versão anonimizada; o revisor pode ler o seu histórico</td></tr>
+          <tr><td><b>Duplo-cega</b></td><td>Ambos anônimos — o caso da revista <em>Production</em>, com «two or more reviewers»</td><td>Versão anonimizada obrigatória (Parte 4); autocitações na terceira pessoa</td></tr>
+          <tr><td><b>Aberta</b></td><td>Nomes conhecidos; às vezes o parecer é publicado com o artigo</td><td>O tom da resposta é público; responda como se fosse ser lido por todos — porque será</td></tr>
+        </tbody></table></div>
+        <div class="note"><span class="blabel">Sem números</span><p>Tempo de revisão e taxa de aceite variam por periódico e por ano, e nenhum foi conferido para este manual. Se o periódico publica os seus, eles estão na página de instruções ou de «about» — anote-os no checklist com a data.</p></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Decisão</th><th>O que significa</th><th style="width:230px">O que fazer</th></tr></thead><tbody>
+          <tr><td><b>Desk reject</b></td><td>Rejeição pelo editor, sem revisores: fora do escopo, formato, extensão, carta, similaridade</td><td>Não é sobre a qualidade da pesquisa; é sobre a escolha do periódico ou a preparação. Próximo periódico, com o checklist refeito</td></tr>
+          <tr><td><b>Rejeição</b></td><td>Após revisão: os revisores ou o editor não recomendam</td><td>Ler os pareceres como se fossem de uma revisão maior; corrigir; próximo periódico</td></tr>
+          <tr><td><b>Revisão maior</b></td><td>O artigo pode ser aceito se mudanças substanciais forem feitas; volta aos revisores</td><td>Responder ponto a ponto (slide seguinte); prazo do sistema</td></tr>
+          <tr><td><b>Revisão menor</b></td><td>Ajustes; em geral só o editor confere</td><td>O mesmo rigor: toda observação tem resposta</td></tr>
+          <tr><td><b>Aceite</b></td><td>Vai para produção: provas, licença, DOI</td><td>Slide «Rejeição e aceite»</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>«Revisão maior» é a resposta mais comum a um artigo que vai ser publicado — não é um quase-não. O que decide é a resposta: completa, cortês, com argumento onde discorda e com a página e a linha de cada mudança.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s37" data-title="resposta_revisores.py: responder ponto a ponto">
+  <div class="inner">
+    <div class="kicker-part rv">Revisão, decisão e publicação<span>2 de 5 · execução real de 09/09/2026 · Python 3, só biblioteca padrão · dados ilustrativos</span></div>
+    <h2 class="rv"><code>resposta_revisores.py</code>: a decisão do editor vira uma tabela «Comentário | Resposta | Alteração (página/linha)» — e nenhum comentário fica sem linha</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/sb_t3_resposta.jpg" width="1920" height="846" alt="Terminal: python3 scripts/resposta_revisores.py comentarios.txt --saida RESPOSTA_REVISORES.md responde 3 bloco(s), 8 comentário(s) a responder — Editor: 1, Revisor 1: 4, Revisor 2: 3, e o arquivo mostra as tabelas com as colunas #, Comentário, Resposta e Alteração (página/linha)"></div><figcaption><b>Figura 32</b> Execução real de 09/09/2026 (dados ilustrativos; caminho trocado por <code>/home/usuario</code>): o script lê o texto da decisão em <code>comentarios.txt</code> — blocos «Editor», «Revisor 1», «Revisor 2», itens numerados ou com «-» — e responde «3 bloco(s), 8 comentário(s) a responder — Editor: 1, Revisor 1: 4, Revisor 2: 3», gravando as tabelas em <code>RESPOSTA_REVISORES.md</code>. Os comentários são fictícios.</figcaption></figure>
+    <div class="two rv">
+      <div>
+        <div class="code"><div class="code-head">terminal — uso, e o formato do comentarios.txt</div><pre>python3 scripts/resposta_revisores.py comentarios.txt --saida RESPOSTA_REVISORES.md
+
+# comentarios.txt: cole o e-mail da decisão, um bloco por pessoa
+Editor
+1. …
+Revisor 1
+1. …
+- …
+Revisor 2
+1. …</pre></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:230px">Regra</th><th>Como fica na tabela</th></tr></thead><tbody>
+          <tr><td><b>Toda observação tem resposta</b></td><td>Uma linha por comentário, inclusive os elogios («agradecemos») e os que você não vai atender</td></tr>
+          <tr><td><b>Discordar com argumento</b></td><td>«Mantivemos X porque…» com a referência ou o dado; nunca «discordamos» sozinho, nunca ceder no que está certo</td></tr>
+          <tr><td><b>Apontar página/linha</b></td><td>A coluna «Alteração» diz onde o texto mudou na nova versão — o revisor não vai procurar</td></tr>
+          <tr><td><b>Um só tom</b></td><td>Cortês e direto, para o Editor e para os revisores; o mesmo se a revisão for aberta</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O script monta as linhas; os autores escrevem as respostas — e decidem, comentário a comentário, o que atender e o que sustentar. Ignorar um comentário é o que mais leva uma revisão maior à rejeição: a tabela com uma célula vazia é o lembrete.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s38" data-title="Rejeição e aceite">
+  <div class="inner">
+    <div class="kicker-part rv">Revisão, decisão e publicação<span>3 de 5 · o próximo periódico · provas, licença e DOI</span></div>
+    <h2 class="rv">Rejeição: o próximo periódico — nunca simultâneo. Aceite: provas, licença e DOI, e o que conferir em cada um</h2>
+    <div class="two rv">
+      <div>
+        <div class="compare">
+          <div><div class="cmp-h">Rejeição — o que não fazer</div><ul>
+            <li>Submeter ao próximo periódico no mesmo dia, sem mexer no texto, com a mesma carta</li>
+            <li>Submeter a dois ao mesmo tempo «para ganhar tempo»</li>
+            <li>Discutir com o editor a decisão — salvo erro de fato, documentado</li>
+          </ul></div>
+          <div><div class="cmp-h">Rejeição — o que fazer</div><ul>
+            <li>Ler os pareceres como uma revisão maior: corrigir o que procede, registrar no <code>SUBMISSAO.md</code></li>
+            <li>Refazer o checklist para o próximo periódico — escopo, extensão, formato, carta nova</li>
+            <li>Um de cada vez, sempre; a declaração de exclusividade é assinada de novo</li>
+          </ul></div>
+        </div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Submissão simultânea.</strong> Descoberta pelo Similarity Check ou por um revisor comum aos dois periódicos, resulta em rejeição nos dois e, pelas regras do COPE, em comunicação entre os editores. Não há atalho: o periódico seguinte só recebe o artigo depois que o anterior o devolveu.</p></div>
+      </div>
+      <div>
+        <div class="flow">
+          <div class="node"><span class="nn">1</span><span class="nt">Provas</span><span class="nd">A versão composta pelo periódico: conferir nomes, afiliações, iDs, figuras, tabelas, referências e números; corrigir composição, não reescrever. «Returning your edits promptly prevents delays»</span></div>
+          <div class="node"><span class="nn">2</span><span class="nt">Licença</span><span class="nd">O termo que os autores assinam: CC BY (o caso da revista do exemplo) ou cessão de direitos; é o que decide o que você pode depositar — confira com o Open policy finder</span></div>
+          <div class="node gate"><span class="nn">3</span><span class="nt">DOI</span><span class="nd">O identificador do artigo, atribuído pelo periódico via Crossref; a partir dele o artigo entra no ORCID e no Lattes (slide seguinte)</span></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Nas provas, a única coisa que ainda dá para corrigir sem custo é o que está errado de fato — um nome, uma unidade, um número. A licença, leia antes de assinar: depois de publicado, o que você pode fazer com o próprio artigo é o que o termo diz.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s39" data-title="Publicado: registrar no ORCID e no Lattes, depositar">
+  <div class="inner">
+    <div class="kicker-part rv">Revisão, decisão e publicação<span>4 de 5 · «Add work with a DOI» · Produção bibliográfica do Lattes · Open policy finder</span></div>
+    <h2 class="rv">Publicado: o artigo entra no ORCID pelo DOI, no Lattes pela produção bibliográfica — e a versão permitida vai para o repositório</h2>
+    <div class="two rv">
+      <div>
+        <div class="flow">
+          <div class="node"><span class="nn">1</span><span class="nt">ORCID, por DOI</span><span class="nd">«Works» → «Add» → «Add work with a DOI» → colar o DOI → «Retrieve work details from DOI» → conferir → salvar, visibilidade «Everyone». Se o iD foi vinculado na submissão, o Crossref pode ter escrito o item antes de você: confira em vez de duplicar</span></div>
+          <div class="node"><span class="nn">2</span><span class="nt">Lattes</span><span class="nd">«Atualizar currículo» → produção bibliográfica → artigo publicado, com título, ano, periódico, ISSN e o DOI colado da página do artigo → «Enviar ao CNPq» → publicado em até 24 horas</span></div>
+          <div class="node"><span class="nn">3</span><span class="nt">Depósito</span><span class="nd">A versão que a licença e o Open policy finder permitem (submetida, aceita ou publicada), no repositório institucional ou temático, com o embargo que houver — manual de Ciência aberta</span></div>
+          <div class="node gate"><span class="nn">4</span><span class="nt">Conferir</span><span class="nd"><code>orcid_lattes_diff.py</code>: «em ambos» tem de incluir o artigo novo; «só no ORCID» e «só no Lattes» têm de estar vazios (slide seguinte)</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">O mesmo dado</th><th>No ORCID</th><th>No Lattes</th></tr></thead><tbody>
+          <tr><td><b>DOI</b></td><td>Vem do registro do DOI, ao recuperar</td><td>Colado da página do artigo — nunca digitado</td></tr>
+          <tr><td><b>Título</b></td><td>Vem do registro do DOI</td><td>Igual ao publicado, na língua publicada</td></tr>
+          <tr><td><b>Periódico e ISSN</b></td><td>Vem do registro do DOI</td><td>O ISSN que está na página do periódico — é ele que a Sucupira usa</td></tr>
+          <tr><td><b>Ano</b></td><td>O da publicação</td><td>O mesmo — não o do aceite</td></tr>
+          <tr><td><b>Nome de citação</b></td><td>O nome publicado do registro</td><td>O nome de citação de «Dados gerais»</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Registre no dia em que o DOI resolver, não «quando der»: o artigo sem registro não conta para o edital, para a defesa nem para a avaliação do programa — e o que se adia se esquece. O depósito da versão permitida é a parte que faz o artigo ser lido por quem não tem assinatura.</p></div>
+        <div class="note"><span class="blabel">Preprint</span><p>Se houve preprint, agrupe-o com o artigo no ORCID («Group multiple versions») e não o altere para parecer a versão final — a revista do exemplo diz isso com todas as letras.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s40" data-title="Manter os dois registros coerentes">
+  <div class="inner">
+    <div class="kicker-part rv">Revisão, decisão e publicação<span>5 de 5 · orcid_lattes_diff.py, de novo · execução real de 09/09/2026, dados ilustrativos</span></div>
+    <h2 class="rv">Manter os dois registros coerentes: rodar o <code>orcid_lattes_diff.py</code> depois de cada artigo e antes de cada edital — e resolver cada linha de «só num dos dois»</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/sb_t4_orcid_lattes.jpg" width="1920" height="925" alt="Terminal: a mesma execução do orcid_lattes_diff.py com o iD de teste e o XML ilustrativo, mostrando 6 trabalhos no ORCID, 3 artigos no Lattes, 4 só no ORCID, 1 só no Lattes e 2 em ambos"></div><figcaption><b>Figura 33</b> A mesma execução real de 09/09/2026 da Parte 2 (dados ilustrativos; caminho trocado por <code>/home/usuario</code>): «só no ORCID: 4 · só no Lattes: 1 · em ambos: 2». Num registro coerente, depois do artigo publicado, as duas primeiras listas estão vazias e o artigo novo está em «em ambos». Nada é alterado em nenhum registro.</figcaption></figure>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Linha do DIFERENCAS.md</th><th>O que costuma ser</th><th style="width:250px">O que os autores fazem</th></tr></thead><tbody>
+          <tr><td><b>Só no ORCID</b></td><td>Trabalho escrito por um serviço conectado; preprint; artigo ainda não lançado no Lattes</td><td>Lançar no Lattes com o mesmo DOI — ou, se não é seu, remover do ORCID</td></tr>
+          <tr><td><b>Só no Lattes</b></td><td>Artigo antigo sem DOI; DOI digitado com erro; artigo que nunca entrou no ORCID</td><td>Adicionar ao ORCID pelo DOI; corrigir o DOI no Lattes; para o que não tem DOI, o casamento é por título</td></tr>
+          <tr><td><b>Em ambos</b></td><td>O que está certo</td><td>Nada — é o objetivo</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Quando: depois de cada artigo publicado e antes de cada edital, defesa ou relatório. O script lê a API pública e o XML exportado; não altera nada, não precisa de senha, e a saída é um arquivo que fica na pasta do projeto com a data. Coerência não é ter muito nos dois — é ter o mesmo.</p></div>
+        <div class="note"><span class="blabel">Nomes, de novo</span><p>O script compara trabalhos, não nomes. O nome de citação — igual no ORCID, no Lattes e no artigo — é decisão que se toma uma vez (Parte 2) e que nenhum script confere por você.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 6 ===================== -->
+<section class="slide divider" id="s41" data-title="Parte 6 · Fechar"><div class="inner"><div class="kicker-part rv">Parte 6<span>Fechar</span></div><h2 class="rv">Tudo num só plugin; erros comuns; checklist; glossário; referências; como citar</h2><p class="rv">A skill que reúne checklist, carta, resposta e comparação dentro do assistente — sem decidir nada pelos autores —, a lista do que costuma dar errado entre o manuscrito pronto e o artigo registrado, o checklist para conferir antes de clicar em enviar, os termos e as fontes.</p></div><div class="num">06</div></section>
+
+<section class="slide" id="s42" data-title="Tudo num só plugin">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>1 de 6 · skill submissao-orcid-lattes do plugin Pesquisa MirandasTech</span></div>
+    <h2 class="rv">Tudo num só plugin: a skill <code>submissao-orcid-lattes</code> monta checklist, carta, resposta e comparação a partir do que os autores decidem — e recusa submeter por você</h2>
+    <div class="two rv">
+      <div>
+        <p class="lead">O <a href="https://plugin.mirandastech.com.br/">plugin Pesquisa MirandasTech</a> (Claude Code e Codex) traz a skill <code>submissao-orcid-lattes</code>, que segue este manual: gera o checklist com o <code>checklist_submissao.py</code>, a carta com o <code>carta_apresentacao.py</code>, a tabela de respostas com o <code>resposta_revisores.py</code> e a comparação com o <code>orcid_lattes_diff.py</code>. O que ela não faz é decidir: <strong>onde submeter, o que declarar e o que tornar público é dos autores</strong>. A skill nunca entra em conta nenhuma — não tem senha do ORCID, do Lattes nem do sistema de submissão — e nunca clica em enviar.</p>
+        <div class="tw"><table><thead><tr><th style="width:110px">Passo</th><th>O que a skill faz com você</th></tr></thead><tbody>
+          <tr><td><b>1</b></td><td>ORCID e Lattes: lê o registro público pela API, pede o XML exportado, roda o <code>orcid_lattes_diff.py</code> e lista o que resolver</td></tr>
+          <tr><td><b>2</b></td><td>Periódico: monta o checklist «Escolher» com as perguntas do Think. Check. Submit. e pede a evidência de cada «sim»</td></tr>
+          <tr><td><b>3</b></td><td>Preparar: carta com as sete declarações a partir do que você responde; CRediT por autor; versão anonimizada conferida</td></tr>
+          <tr><td><b>4</b></td><td>Depois: tabela de resposta aos revisores; registro do DOI nos dois lugares; o <code>SUBMISSAO.md</code> atualizado</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="code"><div class="code-head">pedidos ao assistente, na pasta do projeto (a skill lê os scripts e este manual)</div><pre>Compare o meu ORCID 0000-0002-1825-0097 com o curriculo.xml e me diga o que falta em cada um.
+Monte o checklist de submissão para a revista Production e marque o que já tem evidência na pasta.
+Escreva a carta de apresentação em inglês com as sete declarações a partir do PROJETO.md.
+Transforme o e-mail da decisão em tabela de respostas; eu preencho as respostas.
+O artigo saiu com DOI: o que faço no ORCID e no Lattes, nesta ordem?</pre></div>
+        <div class="tw"><table><thead><tr><th style="width:250px">Pedido</th><th>Resposta da skill</th></tr></thead><tbody>
+          <tr><td>«Submete para mim; aqui está a senha»</td><td><span class="pill p-stop">recusa</span> — a skill não recebe credenciais nem clica em enviar</td></tr>
+          <tr><td>«Manda para três periódicos ao mesmo tempo»</td><td><span class="pill p-stop">recusa</span> — um de cada vez; a declaração de exclusividade é dos autores</td></tr>
+          <tr><td>«Inventa uma resposta para o revisor 2»</td><td><span class="pill p-stop">recusa</span> — a tabela ela monta; a resposta e o argumento são seus</td></tr>
+          <tr><td>«Põe o meu orientador como autor, ele não leu»</td><td><span class="pill p-stop">recusa</span> — autoria segue os critérios do periódico e o CRediT</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O assistente prepara; os autores decidem e clicam. Ele lê a API pública do ORCID e o XML que você exportou; não entra em conta, não altera registro, não envia nada. A pasta que ele lê é a do projeto — com o <code>SUBMISSAO.md</code>, o checklist, a carta e as respostas, todos versionados.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s43" data-title="Erros comuns">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>2 de 6</span></div>
+    <h2 class="rv">Erros comuns — como aparecem e como corrigir</h2>
+    <div class="tw rv"><table><thead><tr><th style="width:230px">Erro</th><th>Como aparece</th><th>Causa</th><th style="width:300px">Correção</th></tr></thead><tbody>
+      <tr><td>Dois ORCID iDs</td><td>Artigos divididos entre dois registros; o Lattes aponta para um, o periódico para o outro</td><td>Criou um novo sem buscar o antigo</td><td><span class="pill p-stop">«I have more than one ORCID iD» na central de ajuda; unir</span></td></tr>
+      <tr><td>iD não vinculado no sistema de submissão</td><td>O artigo publicado não aparece no ORCID</td><td>Número digitado num campo de texto, sem autorizar o vínculo</td><td><span class="pill p-amber">autorizar no sistema; conferir em «Trusted parties»</span></td></tr>
+      <tr><td>E-mail institucional perdido</td><td>Não consegue entrar; a recuperação vai para uma caixa que não existe</td><td>Só um e-mail no registro, e o vínculo acabou</td><td><span class="pill p-blue">segundo e-mail verificado hoje («Emails &amp; domains»)</span></td></tr>
+      <tr><td>Visibilidade «Only me» em tudo</td><td>O editor abre o iD e vê um registro vazio</td><td>Padrão da conta em «Only me», ou itens ocultos um a um</td><td><span class="pill p-amber">«Everyone» para trabalhos, nome e vínculo; decidir item a item o resto</span></td></tr>
+      <tr><td>Nome de citação diferente no ORCID, no Lattes e no artigo</td><td>Três autores nos índices; produção que não fecha</td><td>Nome escolhido em cada lugar, em cada época</td><td><span class="pill p-blue">um nome de citação, nos três; «Also known as» para as variantes</span></td></tr>
+      <tr><td>Submeter sem ler as instruções</td><td><em>Desk reject</em> por extensão, idioma, tipo de artigo ou carta ausente</td><td>Formatou antes de ler; leu só o começo</td><td><span class="pill p-blue">ler a página inteira; copiar cada exigência para o checklist</span></td></tr>
+      <tr><td>Carta genérica</td><td>«Submetemos o artigo em anexo para apreciação»</td><td>Não diz por que cabe naquele periódico</td><td><span class="pill p-amber">aderência ao escopo, contribuição, sete declarações (<code>carta_apresentacao.py</code>)</span></td></tr>
+      <tr><td>Submissão simultânea</td><td>Rejeição nos dois periódicos; editores em contato</td><td>«Para ganhar tempo»</td><td><span class="pill p-stop">um periódico de cada vez; o próximo só depois da devolução</span></td></tr>
+      <tr><td>Ignorar um comentário do revisor</td><td>Revisão maior vira rejeição; «os autores não responderam ao ponto 3»</td><td>Respondeu o que quis</td><td><span class="pill p-stop">uma linha por comentário (<code>resposta_revisores.py</code>); discordar com argumento</span></td></tr>
+      <tr><td>Confundir similaridade com plágio</td><td>Pânico com um relatório de 20 % — ou descaso com um texto copiado</td><td>O número lido sem os trechos</td><td><span class="pill p-blue">similaridade é o que o editor avalia; aspas no literal, paráfrase de verdade</span></td></tr>
+      <tr><td>Não registrar o artigo publicado</td><td>Artigo não conta no edital nem na defesa; ORCID e Lattes desatualizados</td><td>«Quando der»</td><td><span class="pill p-amber">no dia do DOI: «Add work with a DOI» + Lattes + <code>orcid_lattes_diff.py</code></span></td></tr>
+      <tr><td>Conectar serviços sem ler</td><td>Trabalhos de homônimos no seu registro</td><td>«Connect now» em tudo</td><td><span class="pill p-stop">ler o que o serviço escreve; revogar em «Trusted parties»</span></td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="slide" id="s44" data-title="Checklist antes de clicar em enviar">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>3 de 6</span></div>
+    <h2 class="rv">Checklist: antes de clicar em enviar — e depois que o artigo sair</h2>
+    <p class="lead rv">Marque conforme concluir. O estado fica salvo neste navegador — não é compartilhado nem enviado a lugar nenhum.</p>
+    <div class="check rv" id="checklist">
+      <div class="check-item"><input type="checkbox" id="c01"><label for="c01"><b>Um iD</b>Busquei o meu nome no registro ORCID; tenho um único iD, na forma <code>https://orcid.org/…</code></label></div>
+      <div class="check-item"><input type="checkbox" id="c02"><label for="c02"><b>E-mails</b>Dois e-mails verificados no ORCID (um permanente, um institucional); domínio institucional visível; 2FA ligada</label></div>
+      <div class="check-item"><input type="checkbox" id="c03"><label for="c03"><b>Registro público</b>Nome publicado igual ao da autoria, vínculo atual em «Employment», trabalhos em «Everyone»; conferido em «Preview public record»</label></div>
+      <div class="check-item"><input type="checkbox" id="c04"><label for="c04"><b>Partes confiáveis</b>Li «Trusted parties»; revoguei o que não reconheço; nenhum serviço conectado sem ler o que escreve</label></div>
+      <div class="check-item"><input type="checkbox" id="c05"><label for="c05"><b>Lattes</b>Currículo único, e-mail atual em «Dados gerais», campo do ORCID preenchido, nome de citação igual ao do ORCID e do artigo, enviado ao CNPq</label></div>
+      <div class="check-item"><input type="checkbox" id="c06"><label for="c06"><b>Coerência</b><code>orcid_lattes_diff.py</code> rodado; «só no ORCID» e «só no Lattes» resolvidos ou justificados</label></div>
+      <div class="check-item"><input type="checkbox" id="c07"><label for="c07"><b>Periódico</b>Think. Check. Submit. respondido com evidência; Qualis conferido pelo ISSN (evento e data anotados); DOAJ e Open policy finder consultados; editora membro do COPE</label></div>
+      <div class="check-item"><input type="checkbox" id="c08"><label for="c08"><b>Instruções</b>Página de instruções lida inteira; extensão, idioma, tipo, estrutura, licença, taxas e sistema copiados para o checklist com a data</label></div>
+      <div class="check-item"><input type="checkbox" id="c09"><label for="c09"><b>Checklist</b><code>checklist_submissao.py</code> gerado; os 12 itens de «Preparar» com evidência</label></div>
+      <div class="check-item"><input type="checkbox" id="c10"><label for="c10"><b>Carta</b><code>carta_apresentacao.py</code> com 0 campos «[PREENCHER]»; aderência ao escopo daquele periódico; sete declarações verdadeiras</label></div>
+      <div class="check-item"><input type="checkbox" id="c11"><label for="c11"><b>Autoria</b>Todos os autores leram e aprovaram; CRediT por autor; conflito de interesses, ética, dados e uso de IA declarados</label></div>
+      <div class="check-item"><input type="checkbox" id="c12"><label for="c12"><b>Arquivos e metadados</b>Versão completa e versão anonimizada; metadados do sistema iguais ao manuscrito; iD vinculado de cada autor</label></div>
+      <div class="check-item"><input type="checkbox" id="c13"><label for="c13"><b>Exclusividade</b>Não está submetido a nenhum outro periódico; <code>SUBMISSAO.md</code> criado com o número do manuscrito</label></div>
+      <div class="check-item"><input type="checkbox" id="c14"><label for="c14"><b>Depois</b>Resposta ponto a ponto quando vier a decisão; provas devolvidas no prazo; DOI registrado no ORCID e no Lattes no dia; versão permitida depositada; diff rodado de novo</label></div>
+      <div class="check-foot"><span id="check-status">0 de 14</span><button type="button" id="check-reset">limpar</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s45" data-title="Glossário">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>4 de 6</span></div>
+    <h2 class="rv">Glossário</h2>
+    <p class="lead rv">Tudo que aparece no manual sem ser explicado no próprio slide.</p>
+    <div class="gl4 rv"><div><h4 style="margin-top:0">Identidade e registros</h4><dl class="gl"><dt>ORCID iD</dt><dd>Identificador único, persistente e gratuito do pesquisador: 16 dígitos em quatro grupos, forma canônica <code>https://orcid.org/…</code>; o último caractere pode ser «X».</dd><dt>Registro público</dt><dd>A parte do registro ORCID visível a qualquer pessoa: o que está com visibilidade «Everyone». É o que o editor vê ao clicar no iD.</dd><dt>Visibilidade</dt><dd>Três níveis por item no ORCID — everyone, trusted parties, only me — e um padrão da conta para os itens novos.</dd><dt>Partes confiáveis</dt><dd>Organizações e pessoas a quem você deu permissão de interagir com o iD e o registro; listadas em «Trusted parties», revogáveis a qualquer momento.</dd><dt>Delegado</dt><dd>«Trusted individual» ou «Account Delegate»: outro titular de iD autorizado a atualizar o seu registro, sem a sua senha.</dd><dt>Currículo Lattes</dt><dd>O currículo da Plataforma Lattes do CNPq, lançado em 1999, padrão nacional para agências, programas e universidades; publicado em até 24 horas após o envio.</dd><dt>gov.br</dt><dd>A conta única dos serviços federais; uma das formas de entrar no Lattes (as FAQ citam também CPF ou e-mail e senha).</dd><dt>Extrator Lattes</dt><dd>O serviço de «Extração de dados» da Plataforma Lattes, para consultas em lote sobre a base.</dd><dt>XML do Lattes</dt><dd>O arquivo exportado do editor do currículo (ISO-8859-1), com a produção bibliográfica e os DOIs; a entrada do <code>orcid_lattes_diff.py</code>.</dd><dt>DOI</dt><dd>Digital Object Identifier: o identificador persistente do artigo, atribuído pelo periódico via Crossref; a chave que casa ORCID e Lattes.</dd><dt>ISSN</dt><dd>O identificador do periódico; é por ele que se consulta o Qualis e se evita o homônimo.</dd><dt>Preprint</dt><dd>Versão do manuscrito depositada antes da revisão por pares; não deve ser alterada para parecer a versão final; pode ser agrupada com o artigo no ORCID.</dd><dt>APC</dt><dd>Article processing charge: taxa que alguns periódicos cobram dos autores para publicar; o Think. Check. Submit. pede que seja explicada (para quê, quando, moeda, isenções). A revista do exemplo não cobra nenhuma.</dd></dl></div><div><h4 style="margin-top:0">Periódicos, submissão e revisão</h4><dl class="gl"><dt>Qualis</dt><dd>A classificação de periódicos da CAPES usada na avaliação dos programas; no quadriênio 2017-2020, estratos A1–A4, B1–B4 e C.</dd><dt>Área-mãe</dt><dd>A área de avaliação em que o periódico é mais usado; é ela que dá a classificação única do Qualis 2017-2020.</dd><dt>Sucupira</dt><dd>A plataforma da CAPES onde se consulta o Qualis Periódicos, por ISSN ou título.</dd><dt>DOAJ</dt><dd>Directory of Open Access Journals: índice de periódicos de acesso aberto, fundado em 2003 em Lund e gerido pela DOAJ Foundation.</dd><dt>Open policy finder</dt><dd>A base da Jisc (antigo Sherpa Romeo) com as políticas de acesso aberto de periódicos, editoras e financiadores: licença e versão que pode ser depositada.</dd><dt>COPE</dt><dd>Committee on Publication Ethics, fundado em 1997: código de conduta para periódicos e editoras sobre autoria, conflito de interesses e má conduta.</dd><dt>Similarity Check</dt><dd>Serviço do Crossref, movido pelo iThenticate, que dá ao editor um relatório de similaridade; similaridade não é plágio — quem julga é o editor.</dd><dt>CRediT</dt><dd>Contributor Roles Taxonomy: 14 papéis de contribuição, padrão ANSI/NISO Z39.104-2022.</dd><dt>Carta de apresentação</dt><dd>A carta ao editor que acompanha a submissão: aderência ao escopo, contribuição, método, resultado e as declarações.</dd><dt>Revisão duplo-cega</dt><dd>Revisão por pares em que autores e revisores são anônimos entre si; exige a versão anonimizada.</dd><dt>Desk reject</dt><dd>Rejeição pelo editor sem enviar a revisores: escopo, formato, extensão, carta, similaridade.</dd><dt>Revisão maior/menor</dt><dd>Decisões que pedem mudanças substanciais (volta aos revisores) ou ajustes (em geral só o editor confere) antes do aceite.</dd><dt>ScholarOne/OJS/Editorial Manager</dt><dd>Os três sistemas de submissão mais encontrados: Clarivate; PKP (livre); Aries Systems. Mudam os nomes, não o que pedem.</dd></dl></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s46" data-title="Referências">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>5 de 6 · páginas públicas e API pública conferidas em 09/09/2026</span></div>
+    <h2 class="rv">Referências: identificadores e registros; escolha do periódico; sistemas e submissão</h2>
+    <div class="two rv">
+      <ol class="refs" start="1">
+        <li><span class="rt">ORCID. <em>O que é ORCID</em> (pt); página inicial; registro; entrada; busca do registro; central de ajuda: «Add works to your ORCID record», «Visibility settings», «Duplicate accounts». Acesso em 9 set. 2026.</span><a href="https://info.orcid.org/what-is-orcid/">info.orcid.org/what-is-orcid</a> <a href="https://orcid.org/">orcid.org</a> <a href="https://support.orcid.org/">support.orcid.org</a></li>
+        <li><span class="rt">ORCID. <em>API pública</em> — <code>pub.orcid.org/v3.0/&lt;iD&gt;/works</code>; iD de teste 0000-0002-1825-0097. Executada em 9 set. 2026.</span><a href="https://pub.orcid.org/">pub.orcid.org</a></li>
+        <li><span class="rt">CNPq. <em>Plataforma Lattes</em>; <em>Busca Textual</em>; <em>Perguntas Frequentes</em>; serviço «Cadastrar-se no Currículo Lattes» no gov.br. Acesso em 9 set. 2026.</span><a href="https://lattes.cnpq.br/">lattes.cnpq.br</a> <a href="https://buscatextual.cnpq.br/">buscatextual.cnpq.br</a> <a href="https://www.gov.br/cnpq/">gov.br/cnpq</a></li>
+        <li><span class="rt">BRASIL. <em>gov.br — Serviços e Informações do Brasil</em>. Acesso em 9 set. 2026.</span><a href="https://www.gov.br/">gov.br</a></li>
+        <li><span class="rt">CAPES. <em>Plataforma Sucupira — Qualis Periódicos</em> (evento 2017-2020). Acesso em 9 set. 2026; a página oficial sobre o Qualis devolveu 404.</span><a href="https://sucupira.capes.gov.br/">sucupira.capes.gov.br</a></li>
+        <li><span class="rt">THINK. CHECK. SUBMIT. <em>Journals</em> — o checklist. Acesso em 9 set. 2026.</span><a href="https://thinkchecksubmit.org/journals/">thinkchecksubmit.org/journals</a></li>
+        <li><span class="rt">DOAJ. <em>About</em>; blog «DOAJ at 20». Acesso em 9 set. 2026 (busca atrás da Cloudflare).</span><a href="https://doaj.org/about/">doaj.org/about</a></li>
+      </ol>
+      <ol class="refs" start="8">
+        <li><span class="rt">COPE. <em>Committee on Publication Ethics</em> — «Code of Conduct for Members» (jul. 2026). Acesso em 9 set. 2026.</span><a href="https://publicationethics.org/">publicationethics.org</a></li>
+        <li><span class="rt">CROSSREF. <em>Similarity Check</em>. Acesso em 9 set. 2026.</span><a href="https://www.crossref.org/services/similarity-check/">crossref.org/services/similarity-check</a></li>
+        <li><span class="rt">JISC. <em>Open policy finder</em> (antigo Sherpa Romeo). Acesso em 9 set. 2026.</span><a href="https://openpolicyfinder.jisc.ac.uk/">openpolicyfinder.jisc.ac.uk</a></li>
+        <li><span class="rt">NISO. <em>CRediT — Contributor Roles Taxonomy</em>, ANSI/NISO Z39.104-2022. Acesso em 9 set. 2026.</span><a href="https://credit.niso.org/">credit.niso.org</a></li>
+        <li><span class="rt">PUBLIC KNOWLEDGE PROJECT. <em>Open Journal Systems</em>. Acesso em 9 set. 2026.</span><a href="https://pkp.sfu.ca/software/ojs/">pkp.sfu.ca/software/ojs</a></li>
+        <li><span class="rt">ARIES SYSTEMS. <em>Editorial Manager</em> (pt). Acesso em 9 set. 2026.</span><a href="https://www.ariessys.com/">ariessys.com</a></li>
+        <li><span class="rt">ELSEVIER. <em>Submit your paper</em>. Acesso em 9 set. 2026.</span><a href="https://www.elsevier.com/">elsevier.com</a></li>
+        <li><span class="rt">PRODUCTION (ABEPRO). <em>Instructions to authors</em>. SciELO, ISSN 0103-6513 / 1980-5411; submissão pelo ScholarOne. Acesso em 9 set. 2026.</span><a href="https://www.scielo.br/journal/prod/about/">scielo.br/journal/prod/about</a></li>
+        <li><span class="rt">GOOGLE. <em>Google Acadêmico — Perfis</em> (pt-BR). Acesso em 9 set. 2026.</span><a href="https://scholar.google.com/intl/pt-BR/scholar/citations.html">scholar.google.com/intl/pt-BR/scholar/citations.html</a></li>
+        <li><span class="rt">MATIAS, J. P. M. <em>Plugin Pesquisa MirandasTech</em> — repositório público; scripts <code>checklist_submissao.py</code>, <code>carta_apresentacao.py</code>, <code>resposta_revisores.py</code>, <code>orcid_lattes_diff.py</code> e skill <code>submissao-orcid-lattes</code>. Acesso em 9 set. 2026.</span><a href="https://github.com/joaopaulomirandamatias/pesquisa-mirandastech">github.com/joaopaulomirandamatias/pesquisa-mirandastech</a></li>
+      </ol>
+    </div>
+    <div class="note rv"><span class="blabel">Sobre o que não está aqui</span><p>Não há referência ao editor do Lattes (só com login), à página do relatório anual da ORCID (403), à página da CAPES sobre o Qualis (404), à busca do DOAJ (Cloudflare), à página institucional do ScholarOne (404) nem ao ResearchGate (bloqueio) — todas testadas em 09/09/2026. O que o manual afirma sobre elas vem das páginas acima e das FAQ, com a ressalva no próprio slide.</p></div>
+  </div>
+</section>
+
+<section class="slide alt" id="s47" data-title="Como citar, uso de IA e licença">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar · último slide<span>6 de 6</span></div>
+    <h2 class="rv">Como citar este manual, declaração de uso de IA e licença</h2>
+    <div class="two rv">
+      <div>
+        <div class="case"><span class="blabel">Como citar</span><p>MATIAS, J. P. M. <em>Submissão de artigos, ORCID e Lattes.</em> MirandasTech, v1.0, set. 2026. CC BY 4.0.</p><span class="src">Este manual: <a href="https://submissao.mirandastech.com.br/">submissao.mirandastech.com.br</a> (PDF em <a href="https://submissao.mirandastech.com.br/manual.pdf">/manual.pdf</a>). Manuais irmãos: <a href="https://professor.mirandastech.com.br/">professor.mirandastech.com.br</a> · <a href="https://orientador.mirandastech.com.br/">orientador.mirandastech.com.br</a> · <a href="https://defesa.mirandastech.com.br/">defesa.mirandastech.com.br</a> · <a href="https://cienciaaberta.mirandastech.com.br/">cienciaaberta.mirandastech.com.br</a> · <a href="https://bibliometria.mirandastech.com.br/">bibliometria.mirandastech.com.br</a> · <a href="https://dados.mirandastech.com.br/">dados.mirandastech.com.br</a> · <a href="https://git.mirandastech.com.br/">git.mirandastech.com.br</a> · <a href="https://latex.mirandastech.com.br/">latex.mirandastech.com.br</a> · <a href="https://busca.mirandastech.com.br/">busca.mirandastech.com.br</a> · <a href="https://prisma.mirandastech.com.br/">prisma.mirandastech.com.br</a> · <a href="https://zotero.mirandastech.com.br/">zotero.mirandastech.com.br</a> · <a href="https://metodologia.mirandastech.com.br/">metodologia.mirandastech.com.br</a> · <a href="https://notebook.mirandastech.com.br/">notebook.mirandastech.com.br</a> · <a href="https://manual.mirandastech.com.br/">manual.mirandastech.com.br</a> · <a href="https://plugin.mirandastech.com.br/">plugin.mirandastech.com.br</a> · hub: <a href="https://www.mirandastech.com.br/pesquisa">mirandastech.com.br/pesquisa</a></span></div>
+        <div class="rule-box"><span class="blabel">Licença</span><p>Conteúdo, capturas e os scripts <code>checklist_submissao.py</code>, <code>carta_apresentacao.py</code>, <code>resposta_revisores.py</code> e <code>orcid_lattes_diff.py</code>: CC BY 4.0 — use, copie, adapte e redistribua com atribuição. Os dados públicos da ORCID são liberados sob CC0; o OJS é software livre do PKP. ORCID, CNPq, CAPES, gov.br, Jisc, DOAJ, COPE, Crossref, NISO, PKP, Aries Systems, Clarivate, Elsevier, SciELO, ABEPRO, Google e os demais órgãos, projetos e serviços mencionados são marcas, órgãos e projetos de terceiros, sem vínculo nem endosso deste manual.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">Declaração de uso de IA</span><p>Este manual foi escrito com assistência de IA (Claude, Anthropic) na estruturação, na redação, na automação das capturas de tela e na execução dos scripts, sob as regras do manual de Uso de IA na pesquisa científica. Todos os fatos, citações literais, nomes de páginas e botões e referências foram conferidos nas fontes indicadas em 09/09/2026. As capturas públicas foram feitas sem login. As sete telas logadas do ORCID foram capturadas com autorização do titular, com nome, iD, e-mails e afiliação pixelados, e sem alteração no registro: nenhum trabalho adicionado, nenhum serviço conectado, nenhuma configuração salva. Não há telas logadas do Lattes. As saídas dos scripts usam dados ilustrativos e o iD de teste da ORCID. Decisões de conteúdo, seleção das fontes e responsabilidade pelo texto são do autor.</p></div>
+        <div class="colophon" style="margin-top:12px;font-size:11px">Sem garantia: interfaces, serviços, políticas e classificações mudam; cada fato traz a data em que foi verificado. Quando a sua tela — ou a página de instruções do seu periódico — divergir, vale a tela e vale a página. Onde submeter, o que declarar e o que tornar público é decisão dos autores; este manual organiza a decisão e pede a evidência. A responsabilidade pelo que é submetido é de quem assina.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script>
+
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var tot = slides.length; document.getElementById('tot').textContent = tot; var ns = document.getElementById('nslides'); if (ns) ns.textContent = tot;
+  var cur = document.getElementById('cur'), prog = document.getElementById('prog');
+  var menu = document.getElementById('menu'), scrim = document.getElementById('scrim'), menubtn = document.getElementById('menubtn');
+
+  /* sumário gerado a partir dos slides */
+  var html = '', grp = '';
+  slides.forEach(function(s, i){
+    var t = s.getAttribute('data-title') || ('Slide ' + (i+1));
+    if (s.classList.contains('divider')) { html += '<div class="grp">' + t + '</div>'; return; }
+    if (s.classList.contains('cover')) { html += '<div class="grp">Início</div>'; }
+    html += '<a href="#' + s.id + '" data-i="' + i + '"><span class="n">' + String(i+1).padStart(2,'0') + '</span><span>' + t + '</span></a>';
+  });
+  document.getElementById('menulist').innerHTML = html;
+  document.getElementById('menuclose').addEventListener('click', function(){ toggleMenu(false); });
+  var links = Array.prototype.slice.call(menu.querySelectorAll('a'));
+  function toggleMenu(open){ menu.classList.toggle('open', open); scrim.classList.toggle('on', open); }
+  menubtn.addEventListener('click', function(){ toggleMenu(!menu.classList.contains('open')); });
+  scrim.addEventListener('click', function(){ toggleMenu(false); });
+  links.forEach(function(a){ a.addEventListener('click', function(){ toggleMenu(false); }); });
+
+  /* slide ativo: contador, progresso, revelação, sumário */
+  var active = 0;
+  function setActive(i){
+    active = i; cur.textContent = i + 1; prog.style.width = ((i+1)/tot*100) + '%';
+    links.forEach(function(a){ a.classList.toggle('on', +a.getAttribute('data-i') === i); });
+    var on = menu.querySelector('a.on'); if (on && menu.classList.contains('open')) on.scrollIntoView({block:'nearest'});
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    slides.forEach(function(s){ io.observe(s); });
+  } else { slides.forEach(function(s){ s.classList.add('in'); }); }
+  /* slide ativo = o que ocupa mais área visível */
+  var ticking = false;
+  function recompute(){
+    ticking = false; var vh = window.innerHeight, best = 0, bi = active;
+    slides.forEach(function(s, i){ var r = s.getBoundingClientRect(); var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0); if (vis > best) { best = vis; bi = i; } });
+    if (bi !== active) setActive(bi);
+  }
+  window.addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(recompute); } }, { passive: true });
+  window.addEventListener('resize', recompute); recompute(); slides[0].classList.add('in');
+
+  /* ajuste de escala: cada slide cabe na tela (como num programa de apresentação) */
+  function fitAll(){
+    if (window.innerWidth <= 900) { slides.forEach(function(s){ var i = s.querySelector('.inner'); if (i) i.style.zoom = ''; s.classList.add('fit'); }); return; }
+    var avail = window.innerHeight - 52;
+    slides.forEach(function(s){
+      var inner = s.querySelector('.inner'); if (!inner || s.classList.contains('divider') || s.classList.contains('cover')) return;
+      inner.style.zoom = '1'; s.classList.remove('fit');
+      var need = inner.scrollHeight; if (need <= avail) { s.classList.add('fit'); return; }
+      var z = Math.max(0.75, avail / need); inner.style.zoom = z.toFixed(3);
+      if (inner.scrollHeight * z <= avail + 2) s.classList.add('fit');
+    });
+  }
+  window.addEventListener('resize', fitAll); window.addEventListener('load', fitAll); fitAll();
+  /* cards expansíveis abrem em janela sobreposta, sem mudar a altura do slide */
+  var modal = document.getElementById('modal'), mbody = document.getElementById('modal-body'), mtitle = document.getElementById('modal-title');
+  function closeModal(){ modal.classList.remove('on'); mbody.innerHTML = ''; }
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(ev){ if (ev.target === modal) closeModal(); });
+  document.querySelectorAll('details.more').forEach(function(d){
+    var s = d.querySelector('summary'), body = d.querySelector(':scope > div');
+    s.addEventListener('click', function(ev){
+      if (window.matchMedia('print').matches) return;
+      ev.preventDefault(); d.open = false;
+      mtitle.textContent = s.textContent.replace(/^detalhes\s*—\s*/i, '').trim() || 'detalhes';
+      mbody.innerHTML = body.innerHTML; modal.classList.add('on'); attachCopy(mbody);
+    });
+  });
+  /* botão de copiar em código, terminal e prompt */
+  function attachCopy(root){
+    root.querySelectorAll('.code, .term').forEach(function(box){
+      if (box.querySelector(':scope > .copy')) return;
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'copy'; b.textContent = 'copiar'; b.setAttribute('aria-label', 'Copiar conteúdo');
+      b.addEventListener('click', function(){
+        var pre = box.querySelector('pre'); var txt = pre ? pre.innerText : box.innerText;
+        function done(){ b.textContent = 'copiado ✓'; b.classList.add('ok'); setTimeout(function(){ b.textContent = 'copiar'; b.classList.remove('ok'); }, 1600); }
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt); done(); }); } else { fallback(txt); done(); }
+      });
+      box.appendChild(b);
+    });
+  }
+  function fallback(txt){ var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e){} document.body.removeChild(ta); }
+  attachCopy(document);
+  /* popover do glossário */
+  var gpop = document.getElementById('gpop'), gcur = null;
+  function showPop(el){ gpop.innerHTML = '<b>' + el.getAttribute('data-t') + '</b>' + el.getAttribute('data-d'); gpop.classList.add('on');
+    var r = el.getBoundingClientRect(), pw = Math.min(340, window.innerWidth - 24); gpop.style.maxWidth = pw + 'px';
+    var left = Math.max(12, Math.min(r.left, window.innerWidth - pw - 12)); gpop.style.left = left + 'px';
+    var ph = gpop.offsetHeight; var top = r.bottom + 8; if (top + ph > window.innerHeight - 8) top = Math.max(8, r.top - ph - 8); gpop.style.top = top + 'px'; gcur = el; }
+  function hidePop(){ gpop.classList.remove('on'); gcur = null; }
+  document.querySelectorAll('.gterm').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ showPop(el); }); el.addEventListener('mouseleave', hidePop);
+    el.addEventListener('focus', function(){ showPop(el); }); el.addEventListener('blur', hidePop);
+    el.addEventListener('click', function(ev){ ev.stopPropagation(); if (gcur === el) hidePop(); else showPop(el); });
+  });
+  document.addEventListener('click', function(){ if (gcur) hidePop(); }); window.addEventListener('scroll', function(){ if (gcur) hidePop(); }, { passive: true });
+
+  function go(i){ i = Math.max(0, Math.min(tot-1, i)); window.scrollTo({ top: slides[i].offsetTop, behavior: 'smooth' }); }
+  document.getElementById('prev').addEventListener('click', function(){ go(active-1); });
+  document.getElementById('next').addEventListener('click', function(){ go(active+1); });
+  document.addEventListener('keydown', function(ev){
+    if (ev.target && /input|textarea|select/i.test(ev.target.tagName)) return;
+    if (ev.key === 'ArrowDown' || ev.key === 'PageDown' || ev.key === ' ' || ev.key === 'ArrowRight') { ev.preventDefault(); go(active+1); }
+    else if (ev.key === 'ArrowUp' || ev.key === 'PageUp' || ev.key === 'ArrowLeft') { ev.preventDefault(); go(active-1); }
+    else if (ev.key === 'Home') { go(0); } else if (ev.key === 'End') { go(tot-1); }
+    else if (ev.key === 'Escape') { toggleMenu(false); closeModal(); }
+  });
+
+  /* checklist — conveniência por leitor, só neste navegador */
+  var KEY = 'mirandastech-submissao-checklist-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input[type=checkbox]'));
+  var status = document.getElementById('check-status');
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } }
+  function save(st){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){} }
+  function paint(){ var n = 0; boxes.forEach(function(b){ var it = b.closest('.check-item'); if (b.checked) { n++; it.classList.add('done'); } else { it.classList.remove('done'); } }); if (status) status.textContent = n + ' de ' + boxes.length; }
+  var st = load(); boxes.forEach(function(b){ b.checked = !!st[b.id]; b.addEventListener('change', function(){ var s = load(); s[b.id] = b.checked; save(s); paint(); }); }); paint();
+  var reset = document.getElementById('check-reset'); if (reset) reset.addEventListener('click', function(){ boxes.forEach(function(b){ b.checked = false; }); save({}); paint(); });
+})();
+</script>
+<script>
+(function(){
+  var lb = document.createElement('div'); lb.className = 'lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true');
+  lb.innerHTML = '<span class="lb-hint">clique fora ou Esc para fechar</span><button type="button" class="lb-close" aria-label="Fechar">×</button><figure style="margin:0;display:contents"><img alt=""><figcaption hidden></figcaption></figure>';
+  document.body.appendChild(lb);
+  var img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
+  function open(src, alt, text){ img.src = src; img.alt = alt || ''; if (text) { cap.textContent = text; cap.hidden = false; } else { cap.hidden = true; } lb.classList.add('on'); document.body.style.overflow = 'hidden'; }
+  function close(){ lb.classList.remove('on'); img.removeAttribute('src'); document.body.style.overflow = ''; }
+  document.addEventListener('click', function(ev){
+    var t = ev.target;
+    if (t.tagName === 'IMG' && t.closest('.shot')) {
+      var fig = t.closest('figure'), fc = fig && fig.querySelector('figcaption');
+      open(t.currentSrc || t.src, t.alt, fc ? fc.textContent.replace(/\s+/g,' ').trim() : '');
+    }
+  });
+  lb.addEventListener('click', function(ev){ if (ev.target !== img) close(); });
+  document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape' && lb.classList.contains('on')) close(); });
+})();
+</script>
+
+</body>
+</html>
